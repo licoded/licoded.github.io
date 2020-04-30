@@ -1,0 +1,83 @@
+<!DOCTYPE html> <html> <head> <meta http-equiv="content-type" content="text/html; charset=utf-8"> <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" name="viewport"> <meta name="description" content="记录和分享ACM和前端、Java、Python以及计算机课程的学习笔记"> <meta name="keyword" content="hexo-theme, vuejs"> <link rel="shortcut icon" href="/css/images/logo.png"> <title> Chrome 视频播放快捷键脚本 | 一起码代码 </title> <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet"> <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet"> <link rel="stylesheet" href="/css/style.css"> <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script> <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script> <!-- MathJax support START --> <script type="text/x-mathjax-config"> MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      }); </script> <script type="text/x-mathjax-config"> MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      }); </script> <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <!-- MathJax support END --> <meta name="generator" content="Hexo 4.2.0"></head> <div class="wechat-share"> <img src="/css/images/logo.png"> </div> <body> <header class="header fixed-header"> <div class="header-container"> <a class="home-link" href="/"> <div class="logo"></div> <span>一起码代码</span> </a> <ul class="right-list"> <li class="list-item"> <a href="/" class="item-link">首页</a> </li> <li class="list-item"> <a href="/tags/" class="item-link">标签</a> </li> <li class="list-item"> <a href="/archives/" class="item-link">归档</a> </li> <li class="list-item"> <a href="/project/" class="item-link">GitHub项目</a> </li> <li class="list-item"> <a href="/about/" class="item-link">关于我</a> </li> </ul> <div class="menu"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </div> <div class="menu-mask"> <ul class="menu-list"> <li class="menu-item"> <a href="/" class="menu-link">首页</a> </li> <li class="menu-item"> <a href="/tags/" class="menu-link">标签</a> </li> <li class="menu-item"> <a href="/archives/" class="menu-link">归档</a> </li> <li class="menu-item"> <a href="/project/" class="menu-link">GitHub项目</a> </li> <li class="menu-item"> <a href="/about/" class="menu-link">关于我</a> </li> </ul> </div> </div> </header> <div id="article-banner"> <h2>Chrome 视频播放快捷键脚本</h2> <p class="post-date">2020-03-19</p> <div class="arrow-down"> <a href="javascript:;"></a> </div> </div> <main class="app-body flex-box"> <!-- Article START --> <article class="post-article"> <section class="markdown-content"><p>在 Ubuntu 下播放视频使用，把文件拖入 Chrome 的地址栏，F12 打开检查工具，选择console栏，粘贴下面的代码即可</p> <blockquote> <p>页面刷新后就会失效</p> </blockquote> <p>实现的快捷键有：左右方向键调整进度（同时使用Ctrl加快调整速度），v/b: 增加/减慢播放速度</p> <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> video = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'video'</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setv</span>(<span class="params">speed</span>) </span>&#123;</span><br><span class="line">    video.playbackRate = speed;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// speed_control</span></span><br><span class="line"><span class="keyword">let</span> now_speed_value = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> max_speed_value = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> speed_array = [<span class="number">1</span>, <span class="number">1.25</span>, <span class="number">1.5</span>, <span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// play_percent</span></span><br><span class="line"><span class="keyword">const</span> total = video.duration;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">right_move</span>(<span class="params">per</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(video.currentTime + per &lt;= total) &#123;</span><br><span class="line">        video.currentTime += per;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        video.currentTime = total;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">left_move</span>(<span class="params">per</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(video.currentTime - per &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        video.currentTime -= per;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        video.currentTime = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">catchKey</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> input = <span class="built_in">window</span>.event.keyCode;</span><br><span class="line">    <span class="keyword">const</span> flag = <span class="built_in">window</span>.event.ctrlKey;</span><br><span class="line">    <span class="keyword">if</span> (input == <span class="number">86</span> || input == <span class="number">66</span>) &#123;</span><br><span class="line">        now_speed_value += (input==<span class="number">86</span>?<span class="number">1</span>:(max_speed_value<span class="number">-1</span>));</span><br><span class="line">        now_speed_value %= max_speed_value;</span><br><span class="line">        speed = speed_array[now_speed_value];</span><br><span class="line">        setv(speed);</span><br><span class="line">        alert(<span class="string">'当前播放速度：'</span>+speed);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(input == <span class="number">39</span> || input == <span class="number">76</span>) &#123;             <span class="comment">// l 和 右方向键</span></span><br><span class="line">        right_move(flag?<span class="number">30</span>:<span class="number">10</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(input == <span class="number">37</span> || input == <span class="number">72</span>) &#123;             <span class="comment">// h 和 左方向键</span></span><br><span class="line">        left_move(flag?<span class="number">30</span>:<span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.onkeydown = catchKey;</span><br></pre></td></tr></table></figure></section> <!-- Tags START --> <div class="tags"> <span>Tags:</span> <a href="/tags#JavaScript"> <span class="tag-code">JavaScript</span> </a> </div> <!-- Tags END --> <!-- NAV START --> <div class="nav-container"> <!-- reverse left and right to put prev and next in a more logic postition --> <a class="nav-left" href="/cmd-encode-utf8/"> <span class="nav-arrow">← </span> 修改cmd控制台默认编码为utf-8 </a> <a class="nav-right" href="/install-ghost-blog-on-ubuntu/"> Ubuntu服务器搭建Ghost博客 <span class="nav-arrow"> →</span> </a> </div> <!-- NAV END --> <!-- 打赏 START --> <!-- 打赏 END --> <!-- 二维码 START --> <!-- 二维码 END --> <!-- No Comment --> </article> <!-- Article END --> <!-- Catalog START --> <!-- Catalog END --> </main> <script> (function () {
+    var url = 'https://licoded.gitee.io/chrome-video-play-script/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })(); </script> <div class="scroll-top"> <span class="arrow-icon"></span> </div> <footer class="app-footer"> <p class="copyright"> &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> <br> Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a> </p> </footer> <script> function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  } </script> <script> async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  }) </script> <script> var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  }) </script> <!-- Baidu Tongji --> <script src="/js/script.js"></script> </body> </html>
