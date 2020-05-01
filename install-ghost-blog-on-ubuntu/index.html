@@ -14,7 +14,9 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script> <!-- MathJax support START -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"> <!-- MathJax support START -->
     <script type="text/x-mathjax-config"> MathJax.Hub.Config({
         tex2jax: {
           inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
@@ -222,11 +224,29 @@
             <!-- No Comment -->
         </article> <!-- Article END -->
         <!-- Catalog START -->
-        <!-- Catalog END -->
+        <aside class="catalog-container">
+            <div class="toc-main"> <strong class="toc-title">Catalog</strong>
+                <ol class="toc-nav">
+                    <li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#前言"><span class="toc-nav-text">前言</span></a></li>
+                    <li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#创建新管理员用户"><span class="toc-nav-text">创建新管理员用户</span></a></li>
+                    <li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#安装-Node-js-环境和-ghost-cli"><span class="toc-nav-text">安装 Node.js 环境和 ghost-cli</span></a></li>
+                    <li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#安装Nginx环境"><span class="toc-nav-text">安装Nginx环境</span></a></li>
+                    <li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#安装数据库"><span class="toc-nav-text">安装数据库</span></a></li>
+                    <li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#创建网站目录，并安装-ghost"><span class="toc-nav-text">创建网站目录，并安装 ghost</span></a></li>
+                    <li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#CDN-加速"><span class="toc-nav-text">CDN 加速</span></a>
+                        <ol class="toc-nav-child">
+                            <li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#SSL-证书下载"><span class="toc-nav-text">SSL 证书下载</span></a></li>
+                            <li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#域名解析设置"><span class="toc-nav-text">域名解析设置</span></a></li>
+                        </ol>
+                    </li>
+                </ol>
+                <li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#图片优化"><span class="toc-nav-text">图片优化</span></a></li>
+            </div>
+        </aside> <!-- Catalog END -->
     </main>
     <script>
         (function() {
-            var url = 'https://licoded.gitee.io/install-ghost-blog-on-ubuntu/';
+            var url = 'https://www.licoded.top/install-ghost-blog-on-ubuntu/';
             var banner = ''
             if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
                 $('#article-banner').css({
@@ -243,33 +263,6 @@
                 $(this).css({
                     'cursor': 'default'
                 })
-            })
-
-            // zoom image
-            $(".markdown-content img").on('click', function() {
-                var src = $(this).attr('src')
-                if (src !== 'http://file.muyutech.com/error-img.png') {
-                    var imageW = $(this).width()
-                    var imageH = $(this).height()
-
-                    var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
-                    zoom = zoom < 1 ? 1 : zoom
-                    zoom = zoom > 2 ? 2 : zoom
-                    var transY = (($(window).height() - imageH) / 2).toFixed(2)
-
-                    $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
-                    $('.image-view-wrap').addClass('wrap-active')
-                    $('.image-view-wrap img').css({
-                        'width': `${imageW}`,
-                        'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
-                    })
-                    $('html').css('overflow', 'hidden')
-
-                    $('.image-view-wrap').on('click', function() {
-                        $(this).remove()
-                        $('html').attr('style', '')
-                    })
-                }
             })
         })();
     </script>

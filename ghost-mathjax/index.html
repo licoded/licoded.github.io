@@ -14,7 +14,9 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script> <!-- MathJax support START -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"> <!-- MathJax support START -->
     <script type="text/x-mathjax-config"> MathJax.Hub.Config({
         tex2jax: {
           inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
@@ -67,7 +69,7 @@
         <article class="post-article">
             <section class="markdown-content">
                 <p>对我个人来说，博客对数学公式的支持必不可少。这次在ghost上依然是使用MathJax.js来实现，但和在网上搜到的代码不太一样，我是从<a href="http://docs.mathjax.org/en/latest/web/start.html#configuring-mathjax" target="_blank" rel="noopener">最新的MathJax官方文档</a>拿过来的。</p>
-                <p><img src="https://ghimg.licoded.site/ghost/content/images/2020/03/e25ed418c45cb963.png" alt="e25ed418c45cb963"></p>
+                <p><img src="https://ghimg.licoded.site/ghost/content/images/2020/03/e25ed418c45cb963.png?imageMogr2/thumbnail/!60p" alt="e25ed418c45cb963"></p>
                 <p>很简单，把下面的代码粘贴到ghost后台的Code injection中</p>
                 <figure class="highlight html">
                     <table>
@@ -81,7 +83,6 @@
                         </tr>
                     </table>
                 </figure>
-                <p><img src="https://ghimg.licoded.site/ghost/content/images/2020/03/88e922ff8bc7fba7.png" alt="88e922ff8bc7fba7"></p>
             </section> <!-- Tags START -->
             <div class="tags"> <span>Tags:</span> <a href="/tags#Ghost博客"> <span class="tag-code">Ghost博客</span> </a> </div> <!-- Tags END -->
             <!-- NAV START -->
@@ -98,7 +99,7 @@
     </main>
     <script>
         (function() {
-            var url = 'https://licoded.gitee.io/ghost-mathjax/';
+            var url = 'https://www.licoded.top/ghost-mathjax/';
             var banner = ''
             if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
                 $('#article-banner').css({
@@ -115,33 +116,6 @@
                 $(this).css({
                     'cursor': 'default'
                 })
-            })
-
-            // zoom image
-            $(".markdown-content img").on('click', function() {
-                var src = $(this).attr('src')
-                if (src !== 'http://file.muyutech.com/error-img.png') {
-                    var imageW = $(this).width()
-                    var imageH = $(this).height()
-
-                    var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
-                    zoom = zoom < 1 ? 1 : zoom
-                    zoom = zoom > 2 ? 2 : zoom
-                    var transY = (($(window).height() - imageH) / 2).toFixed(2)
-
-                    $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
-                    $('.image-view-wrap').addClass('wrap-active')
-                    $('.image-view-wrap img').css({
-                        'width': `${imageW}`,
-                        'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
-                    })
-                    $('html').css('overflow', 'hidden')
-
-                    $('.image-view-wrap').on('click', function() {
-                        $(this).remove()
-                        $('html').attr('style', '')
-                    })
-                }
             })
         })();
     </script>

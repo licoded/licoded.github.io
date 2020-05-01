@@ -14,7 +14,9 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script> <!-- MathJax support START -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"> <!-- MathJax support START -->
     <script type="text/x-mathjax-config"> MathJax.Hub.Config({
         tex2jax: {
           inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
@@ -71,15 +73,15 @@
                 <ol>
                     <li>
                         <p>使用 <code>win+r</code> 快捷键打开运行窗口，输入 regedit 接着使用回车打开注册表编辑器 </p>
-                        <p> <img src="https://ghimg.licoded.site/ghost/content/images/2020/03/99657d27eabec5b0.png" alt="99657d27eabec5b0"></p>
+                        <p> <img src="https://ghimg.licoded.site/ghost/content/images/2020/03/99657d27eabec5b0.png?imageMogr2/thumbnail/!80p" alt="99657d27eabec5b0"></p>
                     </li>
                     <li>
                         <p>打开 “Command Processor” 目录，新建字符串值</p>
-                        <p> <img src="https://ghimg.licoded.site/ghost/content/images/2020/03/addaaaf4b57be065.png" alt="addaaaf4b57be065"></p>
+                        <p> <img src="https://ghimg.licoded.site/ghost/content/images/2020/03/addaaaf4b57be065.png?imageMogr2/thumbnail/!80p" alt="addaaaf4b57be065"></p>
                     </li>
                     <li>
                         <p>编辑新建的字符串值</p>
-                        <p> <img src="https://ghimg.licoded.site/ghost/content/images/2020/03/eea409a7fd45ebd7.png" alt="eea409a7fd45ebd7"></p>
+                        <p> <img src="https://ghimg.licoded.site/ghost/content/images/2020/03/eea409a7fd45ebd7.png?imageMogr2/thumbnail/!80p" alt="eea409a7fd45ebd7"></p>
                     </li>
                 </ol>
                 <blockquote>
@@ -101,7 +103,7 @@
     </main>
     <script>
         (function() {
-            var url = 'https://licoded.gitee.io/cmd-encode-utf8/';
+            var url = 'https://www.licoded.top/cmd-encode-utf8/';
             var banner = ''
             if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
                 $('#article-banner').css({
@@ -118,33 +120,6 @@
                 $(this).css({
                     'cursor': 'default'
                 })
-            })
-
-            // zoom image
-            $(".markdown-content img").on('click', function() {
-                var src = $(this).attr('src')
-                if (src !== 'http://file.muyutech.com/error-img.png') {
-                    var imageW = $(this).width()
-                    var imageH = $(this).height()
-
-                    var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
-                    zoom = zoom < 1 ? 1 : zoom
-                    zoom = zoom > 2 ? 2 : zoom
-                    var transY = (($(window).height() - imageH) / 2).toFixed(2)
-
-                    $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
-                    $('.image-view-wrap').addClass('wrap-active')
-                    $('.image-view-wrap img').css({
-                        'width': `${imageW}`,
-                        'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
-                    })
-                    $('html').css('overflow', 'hidden')
-
-                    $('.image-view-wrap').on('click', function() {
-                        $(this).remove()
-                        $('html').attr('style', '')
-                    })
-                }
             })
         })();
     </script>

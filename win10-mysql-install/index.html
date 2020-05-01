@@ -14,7 +14,9 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script> <!-- MathJax support START -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"> <!-- MathJax support START -->
     <script type="text/x-mathjax-config"> MathJax.Hub.Config({
         tex2jax: {
           inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
@@ -68,7 +70,7 @@
             <section class="markdown-content">
                 <h2 id="下载和安装"><a href="#下载和安装" class="headerlink" title="下载和安装"></a>下载和安装</h2>
                 <p>从 <a href="https://dev.mysql.com/downloads/mysql" target="_blank" rel="noopener">mysql官网</a> 下载安装包，如下图所示</p>
-                <p><img src="https://ghimg.licoded.site/ghost/content/images/2020/03/e7303436b14c8dc7.png" alt="e7303436b14c8dc7"></p>
+                <p><img src="https://ghimg.licoded.site/ghost/content/images/2020/03/e7303436b14c8dc7.png?imageMogr2/thumbnail/!80p" alt="e7303436b14c8dc7"></p>
                 <p>将 MySQL 解压到自定义的位置，然后在环境变量 Path 中添加 MySQL 解压后的 bin 目录所在的路径，比如我的是：D:\mysql-5.7.28-winx64\bin。</p>
                 <p>以管理员身份执行下面的命令安装 mysql 服务并启动</p>
                 <figure class="highlight bash">
@@ -138,7 +140,7 @@
     </main>
     <script>
         (function() {
-            var url = 'https://licoded.gitee.io/win10-mysql-install/';
+            var url = 'https://www.licoded.top/win10-mysql-install/';
             var banner = ''
             if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
                 $('#article-banner').css({
@@ -155,33 +157,6 @@
                 $(this).css({
                     'cursor': 'default'
                 })
-            })
-
-            // zoom image
-            $(".markdown-content img").on('click', function() {
-                var src = $(this).attr('src')
-                if (src !== 'http://file.muyutech.com/error-img.png') {
-                    var imageW = $(this).width()
-                    var imageH = $(this).height()
-
-                    var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
-                    zoom = zoom < 1 ? 1 : zoom
-                    zoom = zoom > 2 ? 2 : zoom
-                    var transY = (($(window).height() - imageH) / 2).toFixed(2)
-
-                    $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
-                    $('.image-view-wrap').addClass('wrap-active')
-                    $('.image-view-wrap img').css({
-                        'width': `${imageW}`,
-                        'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
-                    })
-                    $('html').css('overflow', 'hidden')
-
-                    $('.image-view-wrap').on('click', function() {
-                        $(this).remove()
-                        $('html').attr('style', '')
-                    })
-                }
             })
         })();
     </script>

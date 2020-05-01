@@ -14,7 +14,9 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script> <!-- MathJax support START -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"> <!-- MathJax support START -->
     <script type="text/x-mathjax-config"> MathJax.Hub.Config({
         tex2jax: {
           inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
@@ -62,7 +64,7 @@
         <p class="post-date">标签检索</p>
     </div>
     <main class="app-body">
-        <div id="tag-cloud"> <a class="tag2" data-name="tag-JavaScript">JavaScript</a> <a class="tag0" data-name="tag-工具使用">工具使用</a> <a class="tag2" data-name="tag-Hexo博客">Hexo博客</a> <a class="tag3" data-name="tag-Ghost博客">Ghost博客</a> <a class="tag0" data-name="tag-Vue.js">Vue.js</a> <a class="tag2" data-name="tag-NodeJs">NodeJs</a> <a class="tag3" data-name="tag-MySQL">MySQL</a> </div>
+        <div id="tag-cloud"> <a class="tag0" data-name="tag-JavaScript">JavaScript</a> <a class="tag2" data-name="tag-工具使用">工具使用</a> <a class="tag0" data-name="tag-Ghost博客">Ghost博客</a> <a class="tag0" data-name="tag-Hexo博客">Hexo博客</a> <a class="tag2" data-name="tag-Vue.js">Vue.js</a> <a class="tag3" data-name="tag-NodeJs">NodeJs</a> <a class="tag1" data-name="tag-MySQL">MySQL</a> </div>
         <div class="tag-list">
             <h3 class="tag-name" id="tag-JavaScript">JavaScript</h3>
             <ul class="tag-preview">
@@ -76,18 +78,18 @@
             </ul>
         </div>
         <div class="tag-list">
-            <h3 class="tag-name" id="tag-Hexo博客">Hexo博客</h3>
-            <ul class="tag-preview">
-                <li> <a href="/hexo-formula/">hexo添加数学公式支持</a> </li>
-            </ul>
-        </div>
-        <div class="tag-list">
             <h3 class="tag-name" id="tag-Ghost博客">Ghost博客</h3>
             <ul class="tag-preview">
                 <li> <a href="/ghost-mathjax/">Ghost 博客添加数学公式支持</a> </li>
             </ul>
             <ul class="tag-preview">
                 <li> <a href="/install-ghost-blog-on-ubuntu/">Ubuntu服务器搭建Ghost博客</a> </li>
+            </ul>
+        </div>
+        <div class="tag-list">
+            <h3 class="tag-name" id="tag-Hexo博客">Hexo博客</h3>
+            <ul class="tag-preview">
+                <li> <a href="/hexo-formula/">hexo添加数学公式支持</a> </li>
             </ul>
         </div>
         <div class="tag-list">
@@ -111,7 +113,7 @@
     </main>
     <script>
         (function() {
-            var url = 'https://licoded.gitee.io/tags/index.html'
+            var url = 'https://www.licoded.top/tags/index.html'
             $('#article-banner').geopattern(url)
             $('.header').removeClass('fixed-header')
 
