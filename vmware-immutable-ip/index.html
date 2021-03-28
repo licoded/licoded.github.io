@@ -7,7 +7,7 @@
     <meta name="description" content="记录和分享ACM和前端、Java、Python以及计算机课程的学习笔记">
     <meta name="keyword" content="hexo-theme, vuejs">
     <link rel="shortcut icon" type="image/ico" href="https://ghimg.licoded.site/vexo/logo.png">
-    <title> hexo添加数学公式支持 | 一起码代码 </title>
+    <title> vmware固定IP | 一起码代码 </title>
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
@@ -59,85 +59,73 @@
         </div>
     </header>
     <div id="article-banner">
-        <h2>hexo添加数学公式支持</h2>
-        <p class="post-date">2020-03-19</p>
+        <h2>vmware固定IP</h2>
+        <p class="post-date">2020-11-07</p>
         <div class="arrow-down"> <a href="javascript:;"></a> </div>
     </div>
     <main class="app-body flex-box">
         <!-- Article START -->
         <article class="post-article">
             <section class="markdown-content">
-                <h2 id="安装MathJax渲染程序"><a href="#安装MathJax渲染程序" class="headerlink" title="安装MathJax渲染程序"></a>安装MathJax渲染程序</h2>
-                <figure class="highlight bash">
-                    <table>
-                        <tr>
-                            <td class="gutter">
-                                <pre><span class="line">1</span><br></pre>
-                            </td>
-                            <td class="code">
-                                <pre><span class="line">npm install hexo-filter-mathjax --save</span><br></pre>
-                            </td>
-                        </tr>
-                    </table>
-                </figure>
-                <p>在根目录下 _config.yml 中添加下面内容</p>
-                <figure class="highlight yaml">
-                    <table>
-                        <tr>
-                            <td class="gutter">
-                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
-                            </td>
-                            <td class="code">
-                                <pre><span class="line"><span class="attr">mathjax:</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">none</span> <span class="comment"># or 'ams' or 'all'</span></span><br><span class="line">  <span class="attr">single_dollars:</span> <span class="literal">true</span> <span class="comment"># enable single dollar signs as in-line math delimiters</span></span><br><span class="line">  <span class="attr">cjk_width:</span> <span class="number">0.9</span> <span class="comment"># relative CJK char width</span></span><br><span class="line">  <span class="attr">normal_width:</span> <span class="number">0.6</span> <span class="comment"># relative normal (monospace) width</span></span><br></pre>
-                            </td>
-                        </tr>
-                    </table>
-                </figure>
-                <h2 id="数学公式测试"><a href="#数学公式测试" class="headerlink" title="数学公式测试"></a>数学公式测试</h2>
-                <figure class="highlight md">
-                    <table>
-                        <tr>
-                            <td class="gutter">
-                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
-                            </td>
-                            <td class="code">
-                                <pre><span class="line">$$</span><br><span class="line">i\hbar\frac&#123;\partial&#125;&#123;\partial t&#125;\psi=-\frac&#123;\hbar^2&#125;&#123;2m&#125;\nabla^2\psi+V\psi</span><br><span class="line">$$</span><br></pre>
-                            </td>
-                        </tr>
-                    </table>
-                </figure>
-                <p>$$<br>i\hbar\frac{\partial}{\partial t}\psi=-\frac{\hbar^2}{2m}\nabla^2\psi+V\psi<br>$$</p>
-                <figure class="highlight md">
-                    <table>
-                        <tr>
-                            <td class="gutter">
-                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
-                            </td>
-                            <td class="code">
-                                <pre><span class="line">\begin&#123;eqnarray\*&#125;</span><br><span class="line">\nabla\cdot\vec&#123;E&#125;&amp;=&amp;\frac&#123;\rho&#125;&#123;\epsilon_0&#125;\\\\</span><br><span class="line">\nabla\cdot\vec&#123;B&#125;&amp;=&amp;0\\\\</span><br><span class="line">\nabla\times\vec&#123;E&#125;&amp;=&amp;-\frac&#123;\partial B&#125;&#123;\partial t&#125;\\\\</span><br><span class="line">\nabla\times\vec&#123;B&#125;&amp;=&amp;\mu<span class="emphasis">_0\left(\vec&#123;J&#125;+\epsilon_</span>0\frac&#123;\partial E&#125;&#123;\partial t&#125;\right)\\\\</span><br><span class="line">\end&#123;eqnarray\*&#125;</span><br></pre>
-                            </td>
-                        </tr>
-                    </table>
-                </figure>
-                <p>\begin{eqnarray*}<br>\nabla\cdot\vec{E}&amp;=&amp;\frac{\rho}{\epsilon_0}\\<br>\nabla\cdot\vec{B}&amp;=&amp;0\\<br>\nabla\times\vec{E}&amp;=&amp;-\frac{\partial B}{\partial t}\\<br>\nabla\times\vec{B}&amp;=&amp;\mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t}\right)\\<br>\end{eqnarray*}</p>
-                <figure class="highlight md">
-                    <table>
-                        <tr>
-                            <td class="gutter">
-                                <pre><span class="line">1</span><br></pre>
-                            </td>
-                            <td class="code">
-                                <pre><span class="line">这是一个行内公式 $y = 2^&#123;log_2x&#125; = x$</span><br></pre>
-                            </td>
-                        </tr>
-                    </table>
-                </figure>
-                <p>这是一个行内公式 $y = 2^{log_2x} = x$</p>
+                <blockquote>
+                    <p>不想再windows上装mysql，所以就装在了vmware虚拟机上。但vmware虚拟的ip地址是固定分配的，这就意味着我每次开机都要在配置文件上换一次ip地址，太麻烦了。我作为一条懒狗加强迫症晚期患者根本忍不了，于是就百度+谷歌折腾了大概一上午，然后有了这篇博客</p>
+                </blockquote>
+                <ol>
+                    <li>
+                        <p>打开VMware的编辑-虚拟网络编辑器，点击更改设置</p>
+                        <p><img src="https://ghimg.licoded.site/picgo/20201107170726.png" alt="01"></p>
+                    </li>
+                </ol>
+                <ol start="2">
+                    <li>
+                        <p>选择类型为NAT模式的那一项，点击下面的NAT设置</p>
+                        <p><img src="https://ghimg.licoded.site/picgo/20201107171123.png" alt="02"></p>
+                    </li>
+                    <li>
+                        <p>修改网关（只能修改4为ip地址的最后一位，并且不能和子网IP的冲突）</p>
+                        <p>然后一定不要忘记，点击确定，点击应用，点击确定</p>
+                        <p><img src="https://ghimg.licoded.site/picgo/20201107171313.png" alt="03"></p>
+                        <p><img src="https://ghimg.licoded.site/picgo/20201107171331.png" alt="04"></p>
+                    </li>
+                    <li>
+                        <p>开启你要固定ip地址的虚拟机</p>
+                    </li>
+                    <li>
+                        <p>查看网卡名字<code>ifconfig</code></p>
+                        <p><img src="https://ghimg.licoded.site/picgo/20201107171714.png" alt="01_ifconfig"></p>
+                        <p>记住带有“RUNNING”字样的网卡的名字，如上图</p>
+                        <p>一般Centos是eth0或eth1，Ubuntu是ens33</p>
+                    </li>
+                    <li>
+                        <p>修改interfaces配置<code>sudo vim /etc/network/interfaces</code></p>
+                        <p>在文件末尾添加下面内容</p>
+                        <figure class="highlight plain">
+                            <table>
+                                <tr>
+                                    <td class="gutter">
+                                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                                    </td>
+                                    <td class="code">
+                                        <pre><span class="line">auto ens33						# 上一步查看的带有RUNNING字样的网卡名称</span><br><span class="line">iface ens33 inet static			# 上一步查看的带有RUNNING字样的网卡名称</span><br><span class="line">address 192.168.247.200			# 要设为的ip地址</span><br><span class="line">netmask 255.255.255.0			# 子网掩码，跟我一样就行了</span><br><span class="line">gateway 192.168.247.20			# 网关（要和第3步中修改的一样）</span><br><span class="line">dns-nameservers 180.76.76.76 	# dns，我这里用的百度的，可以自行更换</span><br></pre>
+                                    </td>
+                                </tr>
+                            </table>
+                        </figure>
+                        <p><img src="https://ghimg.licoded.site/picgo/20201107173426.png" alt="05"></p>
+                        <p>搞完执行<code>service network restart</code>重启网络服务就OK了，如果不行可以先重启一下虚拟机试试</p>
+                    </li>
+                    <li>
+                        <p>如果上面配置完没出问题就不用看这一步了</p>
+                        <p><code>sudo vim /etc/NetworkManager/NetworkManager.conf</code>如下图，修改managed=true</p>
+                        <p><img src="https://ghimg.licoded.site/picgo/20201107172718.png" alt="03_networkmanager"></p>
+                        <p>搞完重启一下虚拟机应该就好了</p>
+                    </li>
+                </ol>
             </section> <!-- Tags START -->
-            <div class="tags"> <span>Tags:</span> <a href="/tags#Hexo博客"> <span class="tag-code">Hexo博客</span> </a> </div> <!-- Tags END -->
+            <div class="tags"> <span>Tags:</span> <a href="/tags#工具使用"> <span class="tag-code">工具使用</span> </a> </div> <!-- Tags END -->
             <!-- NAV START -->
             <div class="nav-container">
-                <!-- reverse left and right to put prev and next in a more logic postition --> <a class="nav-left" href="/win10-mysql-install/"> <span class="nav-arrow">← </span> win10 mysql-5.7.28x64位安装 </a> <a class="nav-right" href="/chrome-video-play-script/"> Chrome 视频播放快捷键脚本 <span class="nav-arrow"> →</span> </a>
+                <!-- reverse left and right to put prev and next in a more logic postition --> <a class="nav-left" href="/vuepress-add-algolia/"> <span class="nav-arrow">← </span> VuePress添加Algolia搜索 </a> <a class="nav-right" href="/pip-install/"> ubuntu安装最新版pip <span class="nav-arrow"> →</span> </a>
             </div> <!-- NAV END -->
             <!-- 打赏 START -->
             <!-- 打赏 END -->
@@ -150,7 +138,7 @@
     </main>
     <script>
         (function() {
-            var url = 'https://www.licoded.top/hexo-formula/';
+            var url = 'https://www.licoded.top/vmware-immutable-ip/';
             var banner = ''
             if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
                 $('#article-banner').css({

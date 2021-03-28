@@ -40,7 +40,7 @@
                 <div class="logo"></div> <span>一起码代码</span>
             </a>
             <ul class="right-list">
-                <li class="list-item"> <a href="/" class="item-link">首页</a> </li>
+                <li class="list-item"> <a href="/" class="item-link active">首页</a> </li>
                 <li class="list-item"> <a href="/tags/" class="item-link">标签</a> </li>
                 <li class="list-item"> <a href="/archives/" class="item-link">归档</a> </li>
                 <li class="list-item"> <a href="/project/" class="item-link">GitHub项目</a> </li>
@@ -49,7 +49,7 @@
             <div class="menu"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </div>
             <div class="menu-mask">
                 <ul class="menu-list">
-                    <li class="menu-item"> <a href="/" class="menu-link">首页</a> </li>
+                    <li class="menu-item"> <a href="/" class="menu-link mobile-active">首页</a> </li>
                     <li class="menu-item"> <a href="/tags/" class="menu-link">标签</a> </li>
                     <li class="menu-item"> <a href="/archives/" class="menu-link">归档</a> </li>
                     <li class="menu-item"> <a href="/project/" class="menu-link">GitHub项目</a> </li>
@@ -58,86 +58,29 @@
             </div>
         </div>
     </header>
-    <div id="article-banner">
-        <h2>Archives</h2>
-        <p class="post-date">2021文章归档</p>
-    </div>
-    <main class="app-body" id="archives">
-        <section class="time-section">
-            <h1 class="section-month"> 2021年 3月 </h1>
-            <div class="section-list">
-                <div class="section-list-item">
-                    <p class="archive-date">23日 <a href="/virtualenvwrapper/" class="archive-title">使用virtualenv搭建Python虚拟环境</a></p>
-                </div>
-                <div class="section-list-item">
-                    <p class="archive-date">23日 <a href="/pip-install/" class="archive-title">ubuntu安装最新版pip</a></p>
-                </div>
-            </div>
-        </section>
-        <section class="time-section">
-            <h1 class="section-month"> 2020年 11月 </h1>
-            <div class="section-list">
-                <div class="section-list-item">
-                    <p class="archive-date">07日 <a href="/vmware-immutable-ip/" class="archive-title">vmware固定IP</a></p>
-                </div>
-            </div>
-        </section>
-        <section class="time-section">
-            <h1 class="section-month"> 2020年 6月 </h1>
-            <div class="section-list">
-                <div class="section-list-item">
-                    <p class="archive-date">21日 <a href="/vuepress-add-algolia/" class="archive-title">VuePress添加Algolia搜索</a></p>
-                </div>
-                <div class="section-list-item">
-                    <p class="archive-date">21日 <a href="/vuepress-setup/" class="archive-title">使用VuePress搭建在线笔记站点</a></p>
-                </div>
-                <div class="section-list-item">
-                    <p class="archive-date">14日 <a href="/publish-javaweb-to-cloud/" class="archive-title">将你的JavaWeb项目发布到线上</a></p>
-                </div>
-            </div>
-        </section>
-        <section class="time-section">
-            <h1 class="section-month"> 2020年 4月 </h1>
-            <div class="section-list">
-                <div class="section-list-item">
-                    <p class="archive-date">24日 <a href="/vue-learn-note01-basics/" class="archive-title">Vue学习笔记01-基础部分</a></p>
-                </div>
-            </div>
-        </section>
-        <section class="time-section">
-            <h1 class="section-month"> 2020年 3月 </h1>
-            <div class="section-list">
-                <div class="section-list-item">
-                    <p class="archive-date">20日 <a href="/install-ghost-blog-on-ubuntu/" class="archive-title">Ubuntu服务器搭建Ghost博客</a></p>
-                </div>
-                <div class="section-list-item">
-                    <p class="archive-date">20日 <a href="/ghost-mathjax/" class="archive-title">Ghost 博客添加数学公式支持</a></p>
-                </div>
-                <div class="section-list-item">
-                    <p class="archive-date">19日 <a href="/win-nvm-use/" class="archive-title">win-nvm使用</a></p>
-                </div>
-                <div class="section-list-item">
-                    <p class="archive-date">19日 <a href="/win10-mysql-install/" class="archive-title">win10 mysql-5.7.28x64位安装</a></p>
-                </div>
-                <div class="section-list-item">
-                    <p class="archive-date">19日 <a href="/hexo-formula/" class="archive-title">hexo添加数学公式支持</a></p>
-                </div>
-                <div class="section-list-item">
-                    <p class="archive-date">19日 <a href="/chrome-video-play-script/" class="archive-title">Chrome 视频播放快捷键脚本</a></p>
-                </div>
-                <div class="section-list-item">
-                    <p class="archive-date">19日 <a href="/cmd-encode-utf8/" class="archive-title">修改cmd控制台默认编码为utf-8</a></p>
-                </div>
-            </div>
-        </section>
+    <main class="app-body">
+        <article class="article-card">
+            <h2 class="article-head"> <a href="/chrome-video-play-script/">Chrome 视频播放快捷键脚本</a> </h2>
+            <p class="article-date">2020年3月19日</p>
+            <div class="article-summary"> 在 Ubuntu 下播放视频使用，把文件拖入 Chrome 的地址栏，F12 打开检查工具，选择console栏，粘贴下面的代码即可 页面刷新后就会失效 实现的快捷键有：左右方向键调整进度（同时使用Ctrl加快调整速度），v/b: 增加/减慢播放速度 123456789101112131 ... </div> <a class="more" href="/chrome-video-play-script/">阅读全文</a>
+        </article>
+        <article class="article-card">
+            <h2 class="article-head"> <a href="/hexo-formula/">hexo添加数学公式支持</a> </h2>
+            <p class="article-date">2020年3月19日</p>
+            <div class="article-summary"> 安装MathJax渲染程序1npm install hexo-filter-mathjax --save 在根目录下 _config.yml 中添加下面内容 12345mathjax: tags: none # or 'ams' or 'all' single_dollars: tru ... </div> <a class="more" href="/hexo-formula/">阅读全文</a>
+        </article>
+        <article class="article-card">
+            <h2 class="article-head"> <a href="/win10-mysql-install/">win10 mysql-5.7.28x64位安装</a> </h2>
+            <p class="article-date">2020年3月19日</p>
+            <div class="article-summary"> 下载和安装从 mysql官网 下载安装包，如下图所示 将 MySQL 解压到自定义的位置，然后在环境变量 Path 中添加 MySQL 解压后的 bin 目录所在的路径，比如我的是：D:\mysql-5.7.28-winx64\bin。 以管理员身份执行下面的命令安装 mysql 服务并启 ... </div> <a class="more" href="/win10-mysql-install/">阅读全文</a>
+        </article>
+        <article class="article-card">
+            <h2 class="article-head"> <a href="/win-nvm-use/">win-nvm使用</a> </h2>
+            <p class="article-date">2020年3月19日</p>
+            <div class="article-summary"> 下载并安装 下载地址：https://github.com/coreybutler/nvm-windows/releases我下载的是 nvm-noinstall.zip 版本 解压到 D:\npm\nvm，如下图所示。 环境变量配置我准备把 node 放在 D:\npm\node 目录 ... </div> <a class="more" href="/win-nvm-use/">阅读全文</a>
+        </article>
+        <div class="guide-pager"> <a href="/"><span class="page-arrow">← </span>Prev</a> <a class="unvisible" href="/">Next <span class="page-arrow">→</span></a> </div>
     </main>
-    <script>
-        (function() {
-            var url = 'https://www.licoded.top/tags/工具使用/index.html';
-            $('#article-banner').geopattern(url);
-            $('.header').removeClass('fixed-header');
-        })();
-    </script>
     <div class="scroll-top"> <span class="arrow-icon"></span> </div>
     <footer class="app-footer">
         <p class="copyright"> &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> <br> Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a> </p>

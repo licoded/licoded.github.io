@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" name="viewport">
+    <meta name="description" content="记录和分享ACM和前端、Java、Python以及计算机课程的学习笔记">
+    <meta name="keyword" content="hexo-theme, vuejs">
+    <link rel="shortcut icon" type="image/ico" href="https://ghimg.licoded.site/vexo/logo.png">
+    <title> VuePress添加Algolia搜索 | 一起码代码 </title>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"> <!-- MathJax support START -->
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      }); </script>
+    <script type="text/x-mathjax-config"> MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      }); </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <!-- MathJax support END -->
+    <meta name="generator" content="Hexo 4.2.1">
+</head>
+
+<body>
+    <header class="header fixed-header">
+        <div class="header-container"> <a class="home-link" href="/">
+                <div class="logo"></div> <span>一起码代码</span>
+            </a>
+            <ul class="right-list">
+                <li class="list-item"> <a href="/" class="item-link">首页</a> </li>
+                <li class="list-item"> <a href="/tags/" class="item-link">标签</a> </li>
+                <li class="list-item"> <a href="/archives/" class="item-link">归档</a> </li>
+                <li class="list-item"> <a href="/project/" class="item-link">GitHub项目</a> </li>
+                <li class="list-item"> <a href="/about/" class="item-link">关于我</a> </li>
+            </ul>
+            <div class="menu"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </div>
+            <div class="menu-mask">
+                <ul class="menu-list">
+                    <li class="menu-item"> <a href="/" class="menu-link">首页</a> </li>
+                    <li class="menu-item"> <a href="/tags/" class="menu-link">标签</a> </li>
+                    <li class="menu-item"> <a href="/archives/" class="menu-link">归档</a> </li>
+                    <li class="menu-item"> <a href="/project/" class="menu-link">GitHub项目</a> </li>
+                    <li class="menu-item"> <a href="/about/" class="menu-link">关于我</a> </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div id="article-banner">
+        <h2>VuePress添加Algolia搜索</h2>
+        <p class="post-date">2020-06-21</p>
+        <div class="arrow-down"> <a href="javascript:;"></a> </div>
+    </div>
+    <main class="app-body flex-box">
+        <!-- Article START -->
+        <article class="post-article">
+            <section class="markdown-content">
+                <p>注册Algolia账号，并新建Index；新建API Key，需要有<code>search</code>、<code>addObject</code>、<code>editSettings</code>和<code>deleteIndex</code>权限</p>
+                <h4 id="创建配置文件"><a href="#创建配置文件" class="headerlink" title="创建配置文件"></a>创建配置文件</h4>
+                <p><code>.env</code>文件</p>
+                <figure class="highlight ini">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line"><span class="attr">APPLICATION_ID</span>=YOUR_APP_ID</span><br><span class="line"><span class="attr">API_KEY</span>=YOUR_ADMIN_KEY</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>config.json文件（示例仅供参考）</p>
+                <figure class="highlight json">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"index_name"</span>: <span class="string">"docs_test"</span>,</span><br><span class="line">  <span class="attr">"start_urls"</span>: [<span class="string">"https://licoded.gitee.io/docs/"</span>],</span><br><span class="line">  <span class="attr">"selectors"</span>: &#123;</span><br><span class="line">    <span class="attr">"lvl0"</span>: &#123;</span><br><span class="line">      <span class="attr">"selector"</span>: <span class="string">"p.sidebar-heading.open"</span>,</span><br><span class="line">      <span class="attr">"global"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"default_value"</span>: <span class="string">"Documentation"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"lvl1"</span>: <span class="string">".content__default h1"</span>,</span><br><span class="line">    <span class="attr">"lvl2"</span>: <span class="string">".content__default h2"</span>,</span><br><span class="line">    <span class="attr">"lvl3"</span>: <span class="string">".content__default h3"</span>,</span><br><span class="line">    <span class="attr">"lvl4"</span>: <span class="string">".content__default h4"</span>,</span><br><span class="line">    <span class="attr">"lvl5"</span>: <span class="string">".content__default h5"</span>,</span><br><span class="line">    <span class="attr">"lvl6"</span>: <span class="string">".content__default h6"</span>,</span><br><span class="line">    <span class="attr">"text"</span>: <span class="string">".content__default p, .content__default ul, .content__default li, .content__default blockquote,a.header-anchor"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h4 id="使用docker爬取数据并添加到Index"><a href="#使用docker爬取数据并添加到Index" class="headerlink" title="使用docker爬取数据并添加到Index"></a>使用docker爬取数据并添加到Index</h4>
+                <blockquote>
+                    <p>部分操作仅适用于Manjaro</p>
+                </blockquote>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment"># 安装jq和docker</span></span><br><span class="line">yay -S jq docker</span><br><span class="line"><span class="comment"># 配置docker镜像</span></span><br><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://yourid.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br><span class="line"><span class="comment"># 运行docker爬虫</span></span><br><span class="line">docker run -it --env-file = .env -e“ CONFIG = $（cat /path/to/your/config.json | jq -r tostring）” algolia / docsearch-scraper</span><br><span class="line"><span class="comment"># 注意config.json一定要使用绝对路径</span></span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h4 id="用Algolia-Search替换内置搜索"><a href="#用Algolia-Search替换内置搜索" class="headerlink" title="用Algolia Search替换内置搜索"></a>用Algolia Search替换内置搜索</h4>
+                <p>在config.js的themeConfig中添加如下配置</p>
+                <figure class="highlight">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">&#123;</span><br><span class="line">	algolia: &#123;</span><br><span class="line">      appId: "APP ID",</span><br><span class="line">      apiKey: "API Key",</span><br><span class="line">      indexName: "docs_test",</span><br><span class="line">      algoliaOptions: &#123;</span><br><span class="line">        hitsPerPage: 10,</span><br><span class="line">        facetFilters: "",</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>在 <code>package.json</code> 中添加快捷命令</p>
+                <figure class="highlight json">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"algolia"</span>: <span class="string">"cd docs/.vuepress/algolia &amp;&amp; sudo sh crawl.sh"</span></span><br><span class="line">&#125;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>完成上述配置以后，就只需要执行 <code>yarn algolia</code> 便可以同步更新 Algolia 的 Index，但要注意一定要先把项目发布到线上，因为docker的爬虫爬取的是线上的网站而非本地的。</p>
+                <p>参考链接：</p>
+                <ul>
+                    <li><a href="https://www.bilibili.com/video/BV1vb411m7NY?p=20" target="_blank" rel="noopener">B站 |一步步搭建 VuePress 及优化|20-algolia 替换默认搜索</a></li>
+                    <li><a href="https://docsearch.algolia.com/docs/run-your-own/" target="_blank" rel="noopener">Algolia DocSearch | Run your own</a></li>
+                </ul>
+            </section> <!-- Tags START -->
+            <div class="tags"> <span>Tags:</span> <a href="/tags#工具使用"> <span class="tag-code">工具使用</span> </a> </div> <!-- Tags END -->
+            <!-- NAV START -->
+            <div class="nav-container">
+                <!-- reverse left and right to put prev and next in a more logic postition --> <a class="nav-left" href="/vuepress-setup/"> <span class="nav-arrow">← </span> 使用VuePress搭建在线笔记站点 </a> <a class="nav-right" href="/vmware-immutable-ip/"> vmware固定IP <span class="nav-arrow"> →</span> </a>
+            </div> <!-- NAV END -->
+            <!-- 打赏 START -->
+            <!-- 打赏 END -->
+            <!-- 二维码 START -->
+            <!-- 二维码 END -->
+            <!-- No Comment -->
+        </article> <!-- Article END -->
+        <!-- Catalog START -->
+        <!-- Catalog END -->
+    </main>
+    <script>
+        (function() {
+            var url = 'https://www.licoded.top/vuepress-add-algolia/';
+            var banner = ''
+            if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+                $('#article-banner').css({
+                    'background-image': 'url(' + banner + ')'
+                })
+            } else {
+                $('#article-banner').geopattern(url)
+            }
+            $('.header').removeClass('fixed-header')
+
+            // error image
+            $(".markdown-content img").on('error', function() {
+                $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+                $(this).css({
+                    'cursor': 'default'
+                })
+            })
+        })();
+    </script>
+    <div class="scroll-top"> <span class="arrow-icon"></span> </div>
+    <footer class="app-footer">
+        <p class="copyright"> &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> <br> Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a> </p>
+    </footer>
+    <script>
+        function async (u, c) {
+            var d = document,
+                t = 'script',
+                o = d.createElement(t),
+                s = d.getElementsByTagName(t)[0];
+            o.src = u;
+            if (c) {
+                o.addEventListener('load', function(e) {
+                    c(null, e);
+                }, false);
+            }
+            s.parentNode.insertBefore(o, s);
+        }
+    </script>
+    <script>
+        async ("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function() {
+            FastClick.attach(document.body);
+        })
+    </script>
+    <script>
+        var hasLine = 'true';
+        async ("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function() {
+            $('figure pre').each(function(i, block) {
+                var figure = $(this).parents('figure');
+                if (hasLine === 'false') {
+                    figure.find('.gutter').hide();
+                }
+                var lang = figure.attr('class').split(' ')[1] || 'code';
+                var codeHtml = $(this).html();
+                var codeTag = document.createElement('code');
+                codeTag.className = lang;
+                codeTag.innerHTML = codeHtml;
+                $(this).attr('class', '').empty().html(codeTag);
+                figure.attr('data-lang', lang.toUpperCase());
+                hljs.highlightBlock(block);
+            });
+        })
+    </script> <!-- Baidu Tongji -->
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

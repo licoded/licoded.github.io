@@ -7,7 +7,7 @@
     <meta name="description" content="记录和分享ACM和前端、Java、Python以及计算机课程的学习笔记">
     <meta name="keyword" content="hexo-theme, vuejs">
     <link rel="shortcut icon" type="image/ico" href="https://ghimg.licoded.site/vexo/logo.png">
-    <title> hexo添加数学公式支持 | 一起码代码 </title>
+    <title> ubuntu安装最新版pip | 一起码代码 </title>
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
@@ -59,15 +59,30 @@
         </div>
     </header>
     <div id="article-banner">
-        <h2>hexo添加数学公式支持</h2>
-        <p class="post-date">2020-03-19</p>
+        <h2>ubuntu安装最新版pip</h2>
+        <p class="post-date">2021-03-23</p>
         <div class="arrow-down"> <a href="javascript:;"></a> </div>
     </div>
     <main class="app-body flex-box">
         <!-- Article START -->
         <article class="post-article">
             <section class="markdown-content">
-                <h2 id="安装MathJax渲染程序"><a href="#安装MathJax渲染程序" class="headerlink" title="安装MathJax渲染程序"></a>安装MathJax渲染程序</h2>
+                <p>在介绍直接安装最新版pip之前我先介绍一种简单通用的安装办法</p>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">sudo apt install python3-pip</span><br><span class="line">pip install -U pip</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>但本人有一定强迫症，所以不想通过升级的方式安装，下面开始正文。</p>
+                <p>这里是<a href="https://pip.pypa.io/en/stable/installing/" target="_blank" rel="noopener">官方安装向导</a></p>
+                <p>首先，下载get-pip.py文件：</p>
                 <figure class="highlight bash">
                     <table>
                         <tr>
@@ -75,69 +90,61 @@
                                 <pre><span class="line">1</span><br></pre>
                             </td>
                             <td class="code">
-                                <pre><span class="line">npm install hexo-filter-mathjax --save</span><br></pre>
+                                <pre><span class="line">curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py</span><br></pre>
                             </td>
                         </tr>
                     </table>
                 </figure>
-                <p>在根目录下 _config.yml 中添加下面内容</p>
-                <figure class="highlight yaml">
-                    <table>
-                        <tr>
-                            <td class="gutter">
-                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
-                            </td>
-                            <td class="code">
-                                <pre><span class="line"><span class="attr">mathjax:</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">none</span> <span class="comment"># or 'ams' or 'all'</span></span><br><span class="line">  <span class="attr">single_dollars:</span> <span class="literal">true</span> <span class="comment"># enable single dollar signs as in-line math delimiters</span></span><br><span class="line">  <span class="attr">cjk_width:</span> <span class="number">0.9</span> <span class="comment"># relative CJK char width</span></span><br><span class="line">  <span class="attr">normal_width:</span> <span class="number">0.6</span> <span class="comment"># relative normal (monospace) width</span></span><br></pre>
-                            </td>
-                        </tr>
-                    </table>
-                </figure>
-                <h2 id="数学公式测试"><a href="#数学公式测试" class="headerlink" title="数学公式测试"></a>数学公式测试</h2>
-                <figure class="highlight md">
-                    <table>
-                        <tr>
-                            <td class="gutter">
-                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
-                            </td>
-                            <td class="code">
-                                <pre><span class="line">$$</span><br><span class="line">i\hbar\frac&#123;\partial&#125;&#123;\partial t&#125;\psi=-\frac&#123;\hbar^2&#125;&#123;2m&#125;\nabla^2\psi+V\psi</span><br><span class="line">$$</span><br></pre>
-                            </td>
-                        </tr>
-                    </table>
-                </figure>
-                <p>$$<br>i\hbar\frac{\partial}{\partial t}\psi=-\frac{\hbar^2}{2m}\nabla^2\psi+V\psi<br>$$</p>
-                <figure class="highlight md">
-                    <table>
-                        <tr>
-                            <td class="gutter">
-                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
-                            </td>
-                            <td class="code">
-                                <pre><span class="line">\begin&#123;eqnarray\*&#125;</span><br><span class="line">\nabla\cdot\vec&#123;E&#125;&amp;=&amp;\frac&#123;\rho&#125;&#123;\epsilon_0&#125;\\\\</span><br><span class="line">\nabla\cdot\vec&#123;B&#125;&amp;=&amp;0\\\\</span><br><span class="line">\nabla\times\vec&#123;E&#125;&amp;=&amp;-\frac&#123;\partial B&#125;&#123;\partial t&#125;\\\\</span><br><span class="line">\nabla\times\vec&#123;B&#125;&amp;=&amp;\mu<span class="emphasis">_0\left(\vec&#123;J&#125;+\epsilon_</span>0\frac&#123;\partial E&#125;&#123;\partial t&#125;\right)\\\\</span><br><span class="line">\end&#123;eqnarray\*&#125;</span><br></pre>
-                            </td>
-                        </tr>
-                    </table>
-                </figure>
-                <p>\begin{eqnarray*}<br>\nabla\cdot\vec{E}&amp;=&amp;\frac{\rho}{\epsilon_0}\\<br>\nabla\cdot\vec{B}&amp;=&amp;0\\<br>\nabla\times\vec{E}&amp;=&amp;-\frac{\partial B}{\partial t}\\<br>\nabla\times\vec{B}&amp;=&amp;\mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t}\right)\\<br>\end{eqnarray*}</p>
-                <figure class="highlight md">
+                <blockquote>
+                    <p>有些系统会提示curl没安装，按照提示装上就可以了</p>
+                </blockquote>
+                <figure class="highlight bash">
                     <table>
                         <tr>
                             <td class="gutter">
                                 <pre><span class="line">1</span><br></pre>
                             </td>
                             <td class="code">
-                                <pre><span class="line">这是一个行内公式 $y = 2^&#123;log_2x&#125; = x$</span><br></pre>
+                                <pre><span class="line">python3 get-pip.py</span><br></pre>
                             </td>
                         </tr>
                     </table>
                 </figure>
-                <p>这是一个行内公式 $y = 2^{log_2x} = x$</p>
+                <p>有的系统到这里就已经成功安装了，但我用的Ubuntu18.04一路坎坷</p>
+                <p>首先，运行get-pip.py出错，提示distutils.util没有安装</p>
+                <p><img src="https://ghimg.licoded.site//picgo/image-20210323094804870.png" alt="image-20210323094804870"></p>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">sudo apt install python3-distutils</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>运行get-pip之后又报错：1.要把~/.local/bin目录添加到环境变量 2.缺少依赖testresources</p>
+                <p><img src="https://ghimg.licoded.site//picgo/image-20210323095855362.png" alt="image-20210323095855362"></p>
+                <p>添加环境变量我就不演示了</p>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">sudo apt install python3-testresources</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
             </section> <!-- Tags START -->
-            <div class="tags"> <span>Tags:</span> <a href="/tags#Hexo博客"> <span class="tag-code">Hexo博客</span> </a> </div> <!-- Tags END -->
+            <div class="tags"> <span>Tags:</span> <a href="/tags#工具使用"> <span class="tag-code">工具使用</span> </a> <a href="/tags#Python"> <span class="tag-code">Python</span> </a> </div> <!-- Tags END -->
             <!-- NAV START -->
             <div class="nav-container">
-                <!-- reverse left and right to put prev and next in a more logic postition --> <a class="nav-left" href="/win10-mysql-install/"> <span class="nav-arrow">← </span> win10 mysql-5.7.28x64位安装 </a> <a class="nav-right" href="/chrome-video-play-script/"> Chrome 视频播放快捷键脚本 <span class="nav-arrow"> →</span> </a>
+                <!-- reverse left and right to put prev and next in a more logic postition --> <a class="nav-left" href="/vmware-immutable-ip/"> <span class="nav-arrow">← </span> vmware固定IP </a> <a class="nav-right" href="/virtualenvwrapper/"> 使用virtualenv搭建Python虚拟环境 <span class="nav-arrow"> →</span> </a>
             </div> <!-- NAV END -->
             <!-- 打赏 START -->
             <!-- 打赏 END -->
@@ -150,7 +157,7 @@
     </main>
     <script>
         (function() {
-            var url = 'https://www.licoded.top/hexo-formula/';
+            var url = 'https://www.licoded.top/pip-install/';
             var banner = ''
             if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
                 $('#article-banner').css({

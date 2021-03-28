@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" name="viewport">
+    <meta name="description" content="记录和分享ACM和前端、Java、Python以及计算机课程的学习笔记">
+    <meta name="keyword" content="hexo-theme, vuejs">
+    <link rel="shortcut icon" type="image/ico" href="https://ghimg.licoded.site/vexo/logo.png">
+    <title> 将你的JavaWeb项目发布到线上 | 一起码代码 </title>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"> <!-- MathJax support START -->
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      }); </script>
+    <script type="text/x-mathjax-config"> MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      }); </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <!-- MathJax support END -->
+    <meta name="generator" content="Hexo 4.2.1">
+</head>
+
+<body>
+    <header class="header fixed-header">
+        <div class="header-container"> <a class="home-link" href="/">
+                <div class="logo"></div> <span>一起码代码</span>
+            </a>
+            <ul class="right-list">
+                <li class="list-item"> <a href="/" class="item-link">首页</a> </li>
+                <li class="list-item"> <a href="/tags/" class="item-link">标签</a> </li>
+                <li class="list-item"> <a href="/archives/" class="item-link">归档</a> </li>
+                <li class="list-item"> <a href="/project/" class="item-link">GitHub项目</a> </li>
+                <li class="list-item"> <a href="/about/" class="item-link">关于我</a> </li>
+            </ul>
+            <div class="menu"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </div>
+            <div class="menu-mask">
+                <ul class="menu-list">
+                    <li class="menu-item"> <a href="/" class="menu-link">首页</a> </li>
+                    <li class="menu-item"> <a href="/tags/" class="menu-link">标签</a> </li>
+                    <li class="menu-item"> <a href="/archives/" class="menu-link">归档</a> </li>
+                    <li class="menu-item"> <a href="/project/" class="menu-link">GitHub项目</a> </li>
+                    <li class="menu-item"> <a href="/about/" class="menu-link">关于我</a> </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div id="article-banner">
+        <h2>将你的JavaWeb项目发布到线上</h2>
+        <p class="post-date">2020-06-14</p>
+        <div class="arrow-down"> <a href="javascript:;"></a> </div>
+    </div>
+    <main class="app-body flex-box">
+        <!-- Article START -->
+        <article class="post-article">
+            <section class="markdown-content">
+                <p>如果正在写JavaWeb项目的你有一台云服务器，恭喜你，你可以参照这篇文章将你的项目发布到你的云服务器上。这在让你获得一定成就感的同时,也更方便向其他人演示你的项目。前后端也能彻底分离，开发前端时不再需要在你的电脑上专门开一个窗口运行后端代码了。最棒的一点是它只占用你服务器的一个端口号，不会和服务器上的其他应用冲突。</p>
+                <h2 id="本地Win10的准备工作"><a href="#本地Win10的准备工作" class="headerlink" title="本地Win10的准备工作"></a>本地Win10的准备工作</h2>
+                <p>安装 winscp </p>
+                <p>安装 wsl 作为 Linux 环境，使用 ssh 命令远程操作云服务器</p>
+                <h2 id="服务器上的准备工作"><a href="#服务器上的准备工作" class="headerlink" title="服务器上的准备工作"></a>服务器上的准备工作</h2>
+                <blockquote>
+                    <p>注意：这里选择jdk8和tomcat7.0.100作为演示，实际要选择和你本地开发环境一致的配置</p>
+                </blockquote>
+                <h3 id="使用-ssh-命令连接云服务器"><a href="#使用-ssh-命令连接云服务器" class="headerlink" title="使用 ssh 命令连接云服务器"></a>使用 ssh 命令连接云服务器</h3>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">ssh username@ip_address</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h3 id="更换国内源"><a href="#更换国内源" class="headerlink" title="更换国内源"></a>更换国内源</h3>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment"># 备份sources.list文件</span></span><br><span class="line">sudo cp /etc/apt/sources.list /etc/apt/sources_init.list</span><br><span class="line"><span class="comment"># 修改sources.list，推荐换成清华源或者阿里源</span></span><br><span class="line">sudo gedit /etc/apt/sources.list</span><br><span class="line"><span class="comment"># 执行update应用更新</span></span><br><span class="line">sudo apt update</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>清华源：<a href="https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/" target="_blank" rel="noopener">https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/</a></p>
+                <p>阿里云：<a href="https://developer.aliyun.com/mirror/ubuntu" target="_blank" rel="noopener">https://developer.aliyun.com/mirror/ubuntu</a></p>
+                <blockquote>
+                    <p>注意选择和自己服务器对应的版本（可以用 <code>lsb_release -a</code> 命令查看）</p>
+                </blockquote>
+                <h3 id="安装-jdk"><a href="#安装-jdk" class="headerlink" title="安装 jdk"></a>安装 jdk</h3>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">sudo apt install openjdk-8-jdk -y</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h3 id="安装tomcat"><a href="#安装tomcat" class="headerlink" title="安装tomcat"></a>安装tomcat</h3>
+                <blockquote>
+                    <p>运行 war 包才需要安装 tomcat，如果你要运行的是 jar 包可以跳过这一步</p>
+                </blockquote>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment"># 创建存放tomcat的目录</span></span><br><span class="line">mkdir -p /usr/tomcat &amp;&amp; <span class="built_in">cd</span> /usr/tomcat</span><br><span class="line"><span class="comment"># 下载tomcat安装包</span></span><br><span class="line">wget https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.100/bin/apache-tomcat-7.0.100.tar.gz</span><br><span class="line"><span class="comment"># 解压缩</span></span><br><span class="line">sudo tar -xvzf apache-tomcat-7.0.100.tar.gz</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h2 id="Struts项目"><a href="#Struts项目" class="headerlink" title="Struts项目"></a>Struts项目</h2>
+                <p>在IDEA中选择Build-&gt;Build Artifacts，会target目录下生成war包</p>
+                <p>使用 winscp 或其他工具把 war 包上传到云服务器 tomcat 的 webapps 目录下，然后 ssh 连接云服务器启动 tomcat</p>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment"># 使用scp上传war包到云服务器</span></span><br><span class="line">scp local_path/your_project.war root@ip_address:cloud_tomcat_path/webapps/</span><br><span class="line"><span class="comment"># 使用ssh远程连接云服务器</span></span><br><span class="line">ssh root@ip_address </span><br><span class="line"><span class="comment"># 跳转到云服务器tomcat的bin目录</span></span><br><span class="line"><span class="built_in">cd</span> cloud_tomcat_path/bin/</span><br><span class="line"><span class="comment"># 如果之前tomcat处于运行状态需要先关闭</span></span><br><span class="line">./shutdown.sh</span><br><span class="line"><span class="comment"># 启动tomcat服务器</span></span><br><span class="line">./startup.sh</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <blockquote>
+                    <p>这里执行 scp 和 ssh 命令时必须以 root 用户的身份，因为 tomcat 的 webapps 目录需要权限才能打开</p>
+                </blockquote>
+                <h2 id="SpringBoot项目"><a href="#SpringBoot项目" class="headerlink" title="SpringBoot项目"></a>SpringBoot项目</h2>
+                <p>在IDEA中点击右侧的Maven面板，点击Lifecycle-&gt;package，会target目录下生成jar包</p>
+                <p>使用 winscp 或其他工具把 war 包上传到云服务器的任意位置，然后 ssh 连接云服务器使用 nohup 命令以后台方式运行 jar 包</p>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment"># 使用scp上传war包到云服务器</span></span><br><span class="line">scp local_path/your_project.jar root@ip_address:cloud_path/</span><br><span class="line"><span class="comment"># 使用ssh远程连接云服务器</span></span><br><span class="line">ssh root@ip_address </span><br><span class="line"><span class="comment"># 跳转到云服务器tomcat的bin目录</span></span><br><span class="line"><span class="built_in">cd</span> cloud_path/</span><br><span class="line"><span class="comment"># 使用nohup命令以后台方式运行jar包</span></span><br><span class="line">nohup java -jar your_project.jar</span><br><span class="line"><span class="comment"># 查看进程号</span></span><br><span class="line">ps -ef|grep java</span><br><span class="line"><span class="comment"># 杀掉进程来强制关闭后台运行的jar包</span></span><br><span class="line"><span class="built_in">kill</span> -9 port</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>一些错误的参考解决办法：</p>
+                <ul>
+                    <li><a href="https://blog.csdn.net/u012613251/article/details/80304722" target="_blank" rel="noopener">解决Error resolving template template might not exist or might not be accessible问题</a></li>
+                </ul>
+                <h2 id="待解决问题"><a href="#待解决问题" class="headerlink" title="待解决问题"></a>待解决问题</h2>
+                <ul>
+                    <li>tomcat修改 <code>/conf/server.xml</code> 中的端口号之后，shutdown时报错</li>
+                </ul>
+            </section> <!-- Tags START -->
+            <div class="tags"> <span>Tags:</span> <a href="/tags#工具使用"> <span class="tag-code">工具使用</span> </a> </div> <!-- Tags END -->
+            <!-- NAV START -->
+            <div class="nav-container">
+                <!-- reverse left and right to put prev and next in a more logic postition --> <a class="nav-left" href="/vue-learn-note01-basics/"> <span class="nav-arrow">← </span> Vue学习笔记01-基础部分 </a> <a class="nav-right" href="/vuepress-setup/"> 使用VuePress搭建在线笔记站点 <span class="nav-arrow"> →</span> </a>
+            </div> <!-- NAV END -->
+            <!-- 打赏 START -->
+            <!-- 打赏 END -->
+            <!-- 二维码 START -->
+            <!-- 二维码 END -->
+            <!-- No Comment -->
+        </article> <!-- Article END -->
+        <!-- Catalog START -->
+        <!-- Catalog END -->
+    </main>
+    <script>
+        (function() {
+            var url = 'https://www.licoded.top/publish-javaweb-to-cloud/';
+            var banner = ''
+            if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+                $('#article-banner').css({
+                    'background-image': 'url(' + banner + ')'
+                })
+            } else {
+                $('#article-banner').geopattern(url)
+            }
+            $('.header').removeClass('fixed-header')
+
+            // error image
+            $(".markdown-content img").on('error', function() {
+                $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+                $(this).css({
+                    'cursor': 'default'
+                })
+            })
+        })();
+    </script>
+    <div class="scroll-top"> <span class="arrow-icon"></span> </div>
+    <footer class="app-footer">
+        <p class="copyright"> &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> <br> Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a> </p>
+    </footer>
+    <script>
+        function async (u, c) {
+            var d = document,
+                t = 'script',
+                o = d.createElement(t),
+                s = d.getElementsByTagName(t)[0];
+            o.src = u;
+            if (c) {
+                o.addEventListener('load', function(e) {
+                    c(null, e);
+                }, false);
+            }
+            s.parentNode.insertBefore(o, s);
+        }
+    </script>
+    <script>
+        async ("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function() {
+            FastClick.attach(document.body);
+        })
+    </script>
+    <script>
+        var hasLine = 'true';
+        async ("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function() {
+            $('figure pre').each(function(i, block) {
+                var figure = $(this).parents('figure');
+                if (hasLine === 'false') {
+                    figure.find('.gutter').hide();
+                }
+                var lang = figure.attr('class').split(' ')[1] || 'code';
+                var codeHtml = $(this).html();
+                var codeTag = document.createElement('code');
+                codeTag.className = lang;
+                codeTag.innerHTML = codeHtml;
+                $(this).attr('class', '').empty().html(codeTag);
+                figure.attr('data-lang', lang.toUpperCase());
+                hljs.highlightBlock(block);
+            });
+        })
+    </script> <!-- Baidu Tongji -->
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" name="viewport">
+    <meta name="description" content="记录和分享ACM和前端、Java、Python以及计算机课程的学习笔记">
+    <meta name="keyword" content="hexo-theme, vuejs">
+    <link rel="shortcut icon" type="image/ico" href="https://ghimg.licoded.site/vexo/logo.png">
+    <title> 使用VuePress搭建在线笔记站点 | 一起码代码 </title>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"> <!-- MathJax support START -->
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      }); </script>
+    <script type="text/x-mathjax-config"> MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      }); </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <!-- MathJax support END -->
+    <meta name="generator" content="Hexo 4.2.1">
+</head>
+
+<body>
+    <header class="header fixed-header">
+        <div class="header-container"> <a class="home-link" href="/">
+                <div class="logo"></div> <span>一起码代码</span>
+            </a>
+            <ul class="right-list">
+                <li class="list-item"> <a href="/" class="item-link">首页</a> </li>
+                <li class="list-item"> <a href="/tags/" class="item-link">标签</a> </li>
+                <li class="list-item"> <a href="/archives/" class="item-link">归档</a> </li>
+                <li class="list-item"> <a href="/project/" class="item-link">GitHub项目</a> </li>
+                <li class="list-item"> <a href="/about/" class="item-link">关于我</a> </li>
+            </ul>
+            <div class="menu"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </div>
+            <div class="menu-mask">
+                <ul class="menu-list">
+                    <li class="menu-item"> <a href="/" class="menu-link">首页</a> </li>
+                    <li class="menu-item"> <a href="/tags/" class="menu-link">标签</a> </li>
+                    <li class="menu-item"> <a href="/archives/" class="menu-link">归档</a> </li>
+                    <li class="menu-item"> <a href="/project/" class="menu-link">GitHub项目</a> </li>
+                    <li class="menu-item"> <a href="/about/" class="menu-link">关于我</a> </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div id="article-banner">
+        <h2>使用VuePress搭建在线笔记站点</h2>
+        <p class="post-date">2020-06-21</p>
+        <div class="arrow-down"> <a href="javascript:;"></a> </div>
+    </div>
+    <main class="app-body flex-box">
+        <!-- Article START -->
+        <article class="post-article">
+            <section class="markdown-content">
+                <h3 id="初始化VuePress项目"><a href="#初始化VuePress项目" class="headerlink" title="初始化VuePress项目"></a>初始化VuePress项目</h3>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment"># 创建文件夹</span></span><br><span class="line">mkdir your-project &amp;&amp; <span class="built_in">cd</span> your-project</span><br><span class="line"><span class="comment"># 安装vuepress</span></span><br><span class="line">yarn add -D vuepress</span><br><span class="line"><span class="comment"># 创建文档目录，并写入一些文字</span></span><br><span class="line">mkdir docs &amp;&amp; <span class="built_in">echo</span> <span class="string">'# Hello VuePress'</span> &gt; docs/README.md</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>接着，在 <code>package.json</code> 中添加一些快捷脚本</p>
+                <figure class="highlight">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"dev"</span>: <span class="string">"vuepress dev docs"</span>,</span><br><span class="line">    <span class="attr">"build"</span>: <span class="string">"vuepress build docs"</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>执行<code>yarn dev</code>，VuePress会在 <a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080</a> 启动一个热重载的本地开发服务器</p>
+                <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3>
+                <figure class="highlight js">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line"><span class="keyword">const</span> navConf = <span class="built_in">require</span>(<span class="string">"./config/navConf.js"</span>);</span><br><span class="line"><span class="keyword">const</span> pluginConf = <span class="built_in">require</span>(<span class="string">"./config/pluginConf.js"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  base: <span class="string">"/docs/"</span>,</span><br><span class="line">  port: <span class="number">8000</span>,</span><br><span class="line">  title: <span class="string">"Licoded's Note"</span>,</span><br><span class="line">  description: <span class="string">"Licoded的笔记, vuepress 文档"</span>,</span><br><span class="line">  themeConfig: &#123;</span><br><span class="line">    repo: <span class="string">"https://gitee.com/licoded/docs"</span>,</span><br><span class="line">    repoLabel: <span class="string">'Gitee'</span>,</span><br><span class="line">    nav: navConf,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: pluginConf,</span><br><span class="line">&#125;;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>配置项</th>
+                            <th>说明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>base</td>
+                            <td>站点的基础路径，可以理解成GitHub仓库名</td>
+                        </tr>
+                        <tr>
+                            <td>port</td>
+                            <td>指定本地开发服务器(dev Server) 的端口，不会影响build文件</td>
+                        </tr>
+                        <tr>
+                            <td>repo</td>
+                            <td>Github仓库/链接</td>
+                        </tr>
+                        <tr>
+                            <td>repoLabel</td>
+                            <td>自定义仓库链接文字</td>
+                        </tr>
+                        <tr>
+                            <td>nav</td>
+                            <td>导航栏链接配置</td>
+                        </tr>
+                        <tr>
+                            <td>plugins</td>
+                            <td>插件配置</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>navConf.js</strong></p>
+                <figure class="highlight js">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line"><span class="built_in">module</span>.exports = [</span><br><span class="line">  &#123; <span class="attr">text</span>: <span class="string">"初心"</span>, <span class="attr">link</span>: <span class="string">"/guide/"</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">text</span>: <span class="string">"大学 "</span>, <span class="attr">link</span>: <span class="string">"/university/"</span> &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    text: <span class="string">"系统"</span>,</span><br><span class="line">    items: [</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">"Linux"</span>, <span class="attr">link</span>: <span class="string">"/os/linux/"</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">"Manjaro"</span>, <span class="attr">link</span>: <span class="string">"/os/manjaro/"</span> &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    text: <span class="string">"前端"</span>,</span><br><span class="line">    items: [&#123; <span class="attr">text</span>: <span class="string">"JavaScript"</span>, <span class="attr">link</span>: <span class="string">"/frontend/javascript/"</span> &#125;],</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    text: <span class="string">"开发工具"</span>,</span><br><span class="line">    items: [</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">"Git"</span>, <span class="attr">link</span>: <span class="string">"/tools/git/"</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">"VSCode"</span>, <span class="attr">link</span>: <span class="string">"/tools/vscode/"</span> &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p><strong>pluginConf.js</strong></p>
+                <figure class="highlight js">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="string">"@vuepress/back-to-top"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="string">"vuepress-plugin-auto-sidebar"</span>: &#123;</span><br><span class="line">    titleMode: <span class="string">"uppercase"</span>,</span><br><span class="line">    titleMap: &#123;</span><br><span class="line">      linux: <span class="string">"Linux 基础"</span>,</span><br><span class="line">      javascript: <span class="string">"JavaScript 基础"</span>,</span><br><span class="line">      guide: <span class="string">"不忘初心"</span>,</span><br><span class="line">      university: <span class="string">"大学记忆"</span>,</span><br><span class="line">      manjaro: <span class="string">"Manjaro"</span>,</span><br><span class="line">      git: <span class="string">"Git"</span>,</span><br><span class="line">      vscode: <span class="string">"VSCode"</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    collapsable: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// collapseList: ["/os/linux"],</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>titleMap相当于起别名，优先级最高，会覆盖titleMap；</p>
+                <p>collapsable，是否折叠侧边栏分组；也可以指定需要折叠的路径数组；</p>
+                <h3 id="使用gh-pages插件"><a href="#使用gh-pages插件" class="headerlink" title="使用gh-pages插件"></a>使用gh-pages插件</h3>
+                <blockquote>
+                    <p>使用这个插件可以很方便地把build出来的dist目录推送到gh-pages分支，不需要手动切换分支</p>
+                </blockquote>
+                <p><strong>安装</strong></p>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">yarn add -D gh-pages</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p><strong>编写脚本</strong></p>
+                <figure class="highlight js">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line"><span class="keyword">var</span> ghpages = <span class="built_in">require</span>(<span class="string">"gh-pages"</span>);</span><br><span class="line">ghpages.publish(</span><br><span class="line">  <span class="string">"./docs/.vuepress/dist"</span>,</span><br><span class="line">  &#123;</span><br><span class="line">    branch: <span class="string">"gh-pages"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"docs同步失败!"</span>);</span><br><span class="line">      <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"docs同步完成!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>在 <code>package.json</code> 中添加快捷命令</p>
+                <figure class="highlight json">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"pages"</span>: <span class="string">"yarn build &amp;&amp; node scripts/pages.js"</span>,</span><br><span class="line">&#125;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h3 id="更新文章后需要的操作"><a href="#更新文章后需要的操作" class="headerlink" title="更新文章后需要的操作"></a>更新文章后需要的操作</h3>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment"># 提交VuePress项目到Gitee</span></span><br><span class="line">git commit -am <span class="string">"your comments"</span></span><br><span class="line">git push -u origin master</span><br><span class="line"><span class="comment"># 推送dist文件夹到gh-pages分支，然后手动到Gitee跟新Pages部署</span></span><br><span class="line">yarn pages </span><br><span class="line"><span class="comment"># 更新AlgoliaSearch的Index</span></span><br><span class="line">yarn algolia</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <blockquote>
+                    <p>选择Gitee也是出于无奈，GithubPages在国内访问慢，coding的Pages现在好像用不了了，它更新之后我就不会用了</p>
+                    <p>Gitee的自动部署是要付费的，一年99元</p>
+                </blockquote>
+                <p>参考链接：</p>
+                <ul>
+                    <li><a href="https://vuepress.vuejs.org/zh/guide" target="_blank" rel="noopener">VuePress快速上手</a></li>
+                    <li><a href="https://shanyuhai123.github.io/vuepress-plugin-auto-sidebar/" target="_blank" rel="noopener">vuepress 自动生成侧边栏插件</a></li>
+                </ul>
+            </section> <!-- Tags START -->
+            <div class="tags"> <span>Tags:</span> <a href="/tags#工具使用"> <span class="tag-code">工具使用</span> </a> </div> <!-- Tags END -->
+            <!-- NAV START -->
+            <div class="nav-container">
+                <!-- reverse left and right to put prev and next in a more logic postition --> <a class="nav-left" href="/publish-javaweb-to-cloud/"> <span class="nav-arrow">← </span> 将你的JavaWeb项目发布到线上 </a> <a class="nav-right" href="/vuepress-add-algolia/"> VuePress添加Algolia搜索 <span class="nav-arrow"> →</span> </a>
+            </div> <!-- NAV END -->
+            <!-- 打赏 START -->
+            <!-- 打赏 END -->
+            <!-- 二维码 START -->
+            <!-- 二维码 END -->
+            <!-- No Comment -->
+        </article> <!-- Article END -->
+        <!-- Catalog START -->
+        <!-- Catalog END -->
+    </main>
+    <script>
+        (function() {
+            var url = 'https://www.licoded.top/vuepress-setup/';
+            var banner = ''
+            if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+                $('#article-banner').css({
+                    'background-image': 'url(' + banner + ')'
+                })
+            } else {
+                $('#article-banner').geopattern(url)
+            }
+            $('.header').removeClass('fixed-header')
+
+            // error image
+            $(".markdown-content img").on('error', function() {
+                $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+                $(this).css({
+                    'cursor': 'default'
+                })
+            })
+        })();
+    </script>
+    <div class="scroll-top"> <span class="arrow-icon"></span> </div>
+    <footer class="app-footer">
+        <p class="copyright"> &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> <br> Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a> </p>
+    </footer>
+    <script>
+        function async (u, c) {
+            var d = document,
+                t = 'script',
+                o = d.createElement(t),
+                s = d.getElementsByTagName(t)[0];
+            o.src = u;
+            if (c) {
+                o.addEventListener('load', function(e) {
+                    c(null, e);
+                }, false);
+            }
+            s.parentNode.insertBefore(o, s);
+        }
+    </script>
+    <script>
+        async ("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function() {
+            FastClick.attach(document.body);
+        })
+    </script>
+    <script>
+        var hasLine = 'true';
+        async ("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function() {
+            $('figure pre').each(function(i, block) {
+                var figure = $(this).parents('figure');
+                if (hasLine === 'false') {
+                    figure.find('.gutter').hide();
+                }
+                var lang = figure.attr('class').split(' ')[1] || 'code';
+                var codeHtml = $(this).html();
+                var codeTag = document.createElement('code');
+                codeTag.className = lang;
+                codeTag.innerHTML = codeHtml;
+                $(this).attr('class', '').empty().html(codeTag);
+                figure.attr('data-lang', lang.toUpperCase());
+                hljs.highlightBlock(block);
+            });
+        })
+    </script> <!-- Baidu Tongji -->
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
