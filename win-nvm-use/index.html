@@ -7,14 +7,14 @@
     <meta name="description" content="记录和分享ACM和前端、Java、Python以及计算机课程的学习笔记">
     <meta name="keyword" content="hexo-theme, vuejs">
     <link rel="shortcut icon" type="image/ico" href="https://ghimg.licoded.site/vexo/logo.png">
-    <title> win-nvm使用 | 星际穿越 </title>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+    <title> win-nvm使用 | 一起码代码 </title>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/tomorrow.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/btmills/geopattern/js/geopattern.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"> <!-- MathJax support START -->
     <script type="text/x-mathjax-config"> MathJax.Hub.Config({
@@ -30,14 +30,14 @@
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       }); </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <!-- MathJax support END -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <!-- MathJax support END -->
     <meta name="generator" content="Hexo 4.2.1">
 </head>
 
 <body>
     <header class="header fixed-header">
         <div class="header-container"> <a class="home-link" href="/">
-                <div class="logo"></div> <span>星际穿越</span>
+                <div class="logo"></div> <span>一起码代码</span>
             </a>
             <ul class="right-list">
                 <li class="list-item"> <a href="/" class="item-link">首页</a> </li>
@@ -71,8 +71,7 @@
                 <blockquote>
                     <p>下载地址：<a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank" rel="noopener">https://github.com/coreybutler/nvm-windows/releases</a><br>我下载的是 nvm-noinstall.zip 版本</p>
                 </blockquote>
-                <p>解压到 D:\npm\nvm，如下图所示。</p>
-                <p><img src="https://ghimg.licoded.site/ghost/content/images/2020/03/12e3c1688084122a.png?imageMogr2/thumbnail/!80p" alt="12e3c1688084122a"></p>
+                <p>解压到 D:\npm\nvm，如下图所示。</p> <img src="https://ghimg.licoded.site/ghost/content/images/2020/03/12e3c1688084122a.png" style="width: 80%;">
                 <h1 id="环境变量配置"><a href="#环境变量配置" class="headerlink" title="环境变量配置"></a>环境变量配置</h1>
                 <p>我准备把 node 放在 D:\npm\node 目录下，所以我的环境变量配置是</p>
                 <ol>
@@ -142,7 +141,7 @@
             <div class="tags"> <span>Tags:</span> <a href="/tags#NodeJs"> <span class="tag-code">NodeJs</span> </a> </div> <!-- Tags END -->
             <!-- NAV START -->
             <div class="nav-container">
-                <!-- reverse left and right to put prev and next in a more logic postition --> <a class="nav-left" href="/win10-mysql-install/"> <span class="nav-arrow">← </span> win10 mysql-5.7.28x64位安装 </a> <a class="nav-right" href="/hexo-formula/"> hexo添加数学公式支持 <span class="nav-arrow"> →</span> </a>
+                <!-- reverse left and right to put prev and next in a more logic postition --> <a class="nav-left" href="/win10-mysql-install/"> <span class="nav-arrow">← </span> win10 mysql-5.7.28x64位安装 </a> <a class="nav-right" href="/chrome-video-play-script/"> Chrome 视频播放快捷键脚本 <span class="nav-arrow"> →</span> </a>
             </div> <!-- NAV END -->
             <!-- 打赏 START -->
             <!-- 打赏 END -->
@@ -168,7 +167,6 @@
 
             // error image
             $(".markdown-content img").on('error', function() {
-                $(this).attr('src', 'http://file.muyutech.com/error-img.png')
                 $(this).css({
                     'cursor': 'default'
                 })
@@ -177,7 +175,7 @@
     </script>
     <div class="scroll-top"> <span class="arrow-icon"></span> </div>
     <footer class="app-footer">
-        <p class="copyright"> <a href="https://beian.miit.gov.cn" target="_blank">豫ICP备19022147号</a> | &copy; 2021 All rights reserved. <br> Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/yanm1ng" target="_blank">yanm1ng</a> </p>
+        <p class="copyright"> <a href="https://beian.miit.gov.cn" target="_blank"></a> | &copy; 2021 All rights reserved. <br> Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/yanm1ng" target="_blank">yanm1ng</a> </p>
     </footer>
     <script>
         function async (u, c) {
@@ -195,13 +193,13 @@
         }
     </script>
     <script>
-        async ("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function() {
+        async ("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function() {
             FastClick.attach(document.body);
         })
     </script>
     <script>
         var hasLine = 'true';
-        async ("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function() {
+        async ("https://cdn.jsdelivr.net/npm/highlightjs@9.12.0/highlight.pack.min.js", function() {
             $('figure pre').each(function(i, block) {
                 var figure = $(this).parents('figure');
                 if (hasLine === 'false') {
