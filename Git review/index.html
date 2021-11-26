@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" name="viewport">
+    <meta name="description" content="记录和分享ACM和前端、Java、Python以及计算机课程的学习笔记">
+    <meta name="keyword" content="hexo-theme, vuejs">
+    <link rel="shortcut icon" type="image/ico" href="https://ghimg.licoded.site/vexo/logo.png">
+    <title> Git review | 星际穿越 </title>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/btmills/geopattern/js/geopattern.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"> <!-- MathJax support START -->
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      }); </script>
+    <script type="text/x-mathjax-config"> MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      }); </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <!-- MathJax support END -->
+    <meta name="generator" content="Hexo 4.2.1">
+</head>
+
+<body>
+    <header class="header fixed-header">
+        <div class="header-container"> <a class="home-link" href="/">
+                <div class="logo"></div> <span>星际穿越</span>
+            </a>
+            <ul class="right-list">
+                <li class="list-item"> <a href="/" class="item-link">首页</a> </li>
+                <li class="list-item"> <a href="/tags/" class="item-link">标签</a> </li>
+                <li class="list-item"> <a href="/archives/" class="item-link">归档</a> </li>
+                <li class="list-item"> <a href="/project/" class="item-link">GitHub项目</a> </li>
+                <li class="list-item"> <a href="/about/" class="item-link">关于我</a> </li>
+            </ul>
+            <div class="menu"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </div>
+            <div class="menu-mask">
+                <ul class="menu-list">
+                    <li class="menu-item"> <a href="/" class="menu-link">首页</a> </li>
+                    <li class="menu-item"> <a href="/tags/" class="menu-link">标签</a> </li>
+                    <li class="menu-item"> <a href="/archives/" class="menu-link">归档</a> </li>
+                    <li class="menu-item"> <a href="/project/" class="menu-link">GitHub项目</a> </li>
+                    <li class="menu-item"> <a href="/about/" class="menu-link">关于我</a> </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div id="article-banner">
+        <h2>Git review</h2>
+        <p class="post-date">2021-11-26</p>
+        <div class="arrow-down"> <a href="javascript:;"></a> </div>
+    </div>
+    <main class="app-body flex-box">
+        <!-- Article START -->
+        <article class="post-article">
+            <section class="markdown-content">
+                <h3 id="Git-review"><a href="#Git-review" class="headerlink" title="Git review"></a>Git review</h3>
+                <blockquote>
+                    <p>学习链接：<a href="https://jira.transwarp.io/browse/WARP-66571" target="_blank" rel="noopener">廖雪峰老师的git教程</a></p>
+                    <p>侵联立删</p>
+                </blockquote>
+                <p>repository: 版本库 可以理解成一个目录，这个目录里面所有文件都可以被git管理起来，每个文件的修改删除，git都能跟踪。</p>
+                <ul>
+                    <li>创建一个repository</li>
+                </ul>
+                <figure class="highlight shell">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">mkdir learngit</span><br><span class="line">cd learngit </span><br><span class="line">pwd</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <ul>
+                    <li>通过git init命令把这个目录变成git可以管理的目录</li>
+                </ul>
+                <figure class="highlight shell">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git init</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>也不一定必须在空目录下构建git仓库，选择一个已经有东西的目录也是可以的。</p>
+                <p>tips: 所有的版本控制系统，其实也只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等。而视频、图片这些二进制文件，虽然也能有版本控制系统管理但是没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是知道图片从100KB变成了120KB。但到底改了啥，版本控制系统不知道，也没法知道。</p>
+                <ul>
+                    <li>编写一个readme.txt文件</li>
+                </ul>
+                <p>一定要放到learngit目录（或子目录下）</p>
+                <ul>
+                    <li>git add</li>
+                </ul>
+                <figure class="highlight shell">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git add readme.txt</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <ul>
+                    <li>git commit</li>
+                </ul>
+                <figure class="highlight shell">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git commit -m "wrote a readme file"</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>为什么git添加文件需要add commit两步？因为commit可以一次提交很多文件，所以可以多次add不同文件</p>
+                <figure class="highlight shell">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git add file1.txt</span><br><span class="line">git add file2.txt file3.txt</span><br><span class="line">git commit -m "add 3 files"</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <ul>
+                    <li>git status</li>
+                </ul>
+                <p>git status可以帮助掌握仓库当前状态，告知哪些文件被修改了，但是想知道具体修改哪些内容git diff 命令</p>
+                <figure class="highlight shell">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git diff readme.txt</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <ul>
+                    <li>git log </li>
+                </ul>
+                <p>版本控制系统的history,即提交历史</p>
+                <p>简洁显示版 </p>
+                <figure class="highlight shell">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git log --pretty=online</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <ul>
+                    <li>git reset版本回退</li>
+                </ul>
+                <figure class="highlight shell">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git reset --hard HEAD^</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <ul>
+                    <li>git reflog</li>
+                </ul>
+                <p>可以查看命令历史，以便知道要回到未来的哪个版本</p>
+                <p>tips: git log 可以查看提交历史，以便确定要回退到哪个版本</p>
+                <p>每次修改 如果不用git add到暂存区，那就不会加入到commit中</p>
+                <ul>
+                    <li>git checkout </li>
+                </ul>
+                <figure class="highlight shell">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git checkout -- readme.txt</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>上面这个命令就是把readme.txt文件在工作区的修改全部撤销，这里有两种情况：</p>
+                <pre><code>1. readme.txt自修改后还没有被放到暂存区，现在撤销修改就回到和版本库一模一样的状态
+1. readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态</code></pre>
+                <p>总之，就是让这个文件回到最近一次git commit或git add时的状态</p>
+                <p>tips: 对于添加到暂存区还没没有commit，想回退到版本库状态，可以使用</p>
+                <figure class="highlight shell">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git reset HEAD readme.txt</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <blockquote>
+                    <p> question: 创建一个文件后 修改并git add, 在git commit之前又删除了这个文件，现在想撤销删除操作，执行git checkout – filename操作会怎么样</p>
+                </blockquote>
+                <ul>
+                    <li>
+                        <p>分支管理</p>
+                        <ul>
+                            <li>创建dev分支</li>
+                        </ul>
+                        <figure class="highlight shell">
+                            <table>
+                                <tr>
+                                    <td class="gutter">
+                                        <pre><span class="line">1</span><br></pre>
+                                    </td>
+                                    <td class="code">
+                                        <pre><span class="line">git checkout -b dev</span><br></pre>
+                                    </td>
+                                </tr>
+                            </table>
+                        </figure>
+                        <p>相当于两条命令：</p>
+                        <figure class="highlight shell">
+                            <table>
+                                <tr>
+                                    <td class="gutter">
+                                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                                    </td>
+                                    <td class="code">
+                                        <pre><span class="line">git branch dev</span><br><span class="line">git checkout dev</span><br></pre>
+                                    </td>
+                                </tr>
+                            </table>
+                        </figure>
+                        <p>使用git branch命令查看当前分支</p>
+                        <figure class="highlight shell">
+                            <table>
+                                <tr>
+                                    <td class="gutter">
+                                        <pre><span class="line">1</span><br></pre>
+                                    </td>
+                                    <td class="code">
+                                        <pre><span class="line">git branch</span><br></pre>
+                                    </td>
+                                </tr>
+                            </table>
+                        </figure>
+                        <ul>
+                            <li>将dev分支的工作成果合并到master分支上</li>
+                        </ul>
+                        <figure class="highlight shell">
+                            <table>
+                                <tr>
+                                    <td class="gutter">
+                                        <pre><span class="line">1</span><br></pre>
+                                    </td>
+                                    <td class="code">
+                                        <pre><span class="line">git merge dev</span><br></pre>
+                                    </td>
+                                </tr>
+                            </table>
+                        </figure>
+                        <ul>
+                            <li>合并完成后可以删除dev分支</li>
+                        </ul>
+                        <figure class="highlight shell">
+                            <table>
+                                <tr>
+                                    <td class="gutter">
+                                        <pre><span class="line">1</span><br></pre>
+                                    </td>
+                                    <td class="code">
+                                        <pre><span class="line">git branch -d dev</span><br></pre>
+                                    </td>
+                                </tr>
+                            </table>
+                        </figure>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p>switch </p>
+                        <p>最新版本的git提供了新的git switch命令来切换分支 以区别checkout既要撤销又作切换时的易混淆问题</p>
+                        <figure class="highlight plain">
+                            <table>
+                                <tr>
+                                    <td class="gutter">
+                                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                                    </td>
+                                    <td class="code">
+                                        <pre><span class="line">git switch -c dev #创建并切换到新的dev分支</span><br><span class="line">git switch master #直接切换到已有的分支</span><br></pre>
+                                    </td>
+                                </tr>
+                            </table>
+                        </figure>
+                    </li>
+                </ul>
+                <blockquote>
+                    <p>question: 本地仓库名与远程仓库名不一样</p>
+                    <p>github私有仓库是否可以git (免费)</p>
+                </blockquote>
+            </section> <!-- Tags START -->
+            <div class="tags"> <span>Tags:</span> <a href="/tags#工具使用"> <span class="tag-code">工具使用</span> </a> </div> <!-- Tags END -->
+            <!-- NAV START -->
+            <div class="nav-container">
+                <!-- reverse left and right to put prev and next in a more logic postition --> <a class="nav-left" href="/virtualenvwrapper/"> <span class="nav-arrow">← </span> 使用virtualenv搭建Python虚拟环境 </a>
+            </div> <!-- NAV END -->
+            <!-- 打赏 START -->
+            <!-- 打赏 END -->
+            <!-- 二维码 START -->
+            <!-- 二维码 END -->
+            <!-- No Comment -->
+        </article> <!-- Article END -->
+        <!-- Catalog START -->
+        <!-- Catalog END -->
+    </main>
+    <script>
+        (function() {
+            var url = 'https://www.licoded.top/Git review/';
+            var banner = ''
+            if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+                $('#article-banner').css({
+                    'background-image': 'url(' + banner + ')'
+                })
+            } else {
+                $('#article-banner').geopattern(url)
+            }
+            $('.header').removeClass('fixed-header')
+
+            // error image
+            $(".markdown-content img").on('error', function() {
+                $(this).css({
+                    'cursor': 'default'
+                })
+            })
+        })();
+    </script>
+    <div class="scroll-top"> <span class="arrow-icon"></span> </div>
+    <footer class="app-footer">
+        <p class="copyright"> <a href="https://beian.miit.gov.cn" target="_blank">豫ICP备19022147号</a> | &copy; 2021 All rights reserved. <br> Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/yanm1ng" target="_blank">yanm1ng</a> </p>
+    </footer>
+    <script>
+        function async (u, c) {
+            var d = document,
+                t = 'script',
+                o = d.createElement(t),
+                s = d.getElementsByTagName(t)[0];
+            o.src = u;
+            if (c) {
+                o.addEventListener('load', function(e) {
+                    c(null, e);
+                }, false);
+            }
+            s.parentNode.insertBefore(o, s);
+        }
+    </script>
+    <script>
+        async ("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function() {
+            FastClick.attach(document.body);
+        })
+    </script>
+    <script>
+        var hasLine = 'true';
+        async ("https://cdn.jsdelivr.net/npm/highlightjs@9.12.0/highlight.pack.min.js", function() {
+            $('figure pre').each(function(i, block) {
+                var figure = $(this).parents('figure');
+                if (hasLine === 'false') {
+                    figure.find('.gutter').hide();
+                }
+                var lang = figure.attr('class').split(' ')[1] || 'code';
+                var codeHtml = $(this).html();
+                var codeTag = document.createElement('code');
+                codeTag.className = lang;
+                codeTag.innerHTML = codeHtml;
+                $(this).attr('class', '').empty().html(codeTag);
+                figure.attr('data-lang', lang.toUpperCase());
+                hljs.highlightBlock(block);
+            });
+        })
+    </script> <!-- Baidu Tongji -->
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
