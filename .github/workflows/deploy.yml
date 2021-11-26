@@ -19,10 +19,12 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SECRET }}
           script: |
+            source /etc/profile
+            source ~/.bashrc
             cd ~/hexo/
             service nginx stop
             rm -rf licoded.github.io
-            git clone https://github.com.cnpmjs.org/licoded/licoded.github.io --depth=1
+            /usr/local/git/bin/git clone https://github.com.cnpmjs.org/licoded/licoded.github.io --depth=1
             sudo chown -R nginx:nginx licoded.github.io
             sudo chmod -R 777 licoded.github.io
             service nginx start
