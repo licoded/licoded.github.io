@@ -1,0 +1,27 @@
+name: deploy to tencent server
+
+on: # 此CI/CD触发时的事件
+  push: # 在代码提交时自动触发
+    branches:
+      - master
+
+# 一个 CI/CD 的工作流有许多 jobs 组成，比如最典型的 job 是 lint，test，build。
+jobs: 
+  deploy: # 构建job
+    runs-on: ubuntu-latest # 跑workflow的服务器系统
+    steps:
+      - name: executing remote ssh commands
+        # 使用appleboy/ssh-action@master来执行命令
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SECRET }}
+          script: |
+            cd ~/hexo/
+            service nginx stop
+            rm -rf licoded.github.io
+            git clone https://github.com.cnpmjs.org/licoded/licoded.github.io --depth=1
+            sudo chown -R nginx:nginx licoded.github.io
+            sudo chmod -R 777 licoded.github.io
+            service nginx start
