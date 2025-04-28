@@ -24,7 +24,7 @@ jobs:
             cd ~/hexo/
             service nginx stop
             rm -rf licoded.github.io
-            /usr/local/git/bin/git clone https://github.com.cnpmjs.org/licoded/licoded.github.io --depth=1
+            git clone https://github.com/licoded/licoded.github.io --depth=1
             sudo chown -R nginx:nginx licoded.github.io
             sudo chmod -R 777 licoded.github.io
             service nginx start
