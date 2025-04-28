@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" name="viewport">
+    <meta name="description" content="记录和分享ACM和前端、Java、Python以及计算机课程的学习笔记">
+    <meta name="keyword" content="hexo-theme, vuejs">
+    <link rel="shortcut icon" type="image/ico" href="https://ghimg.licoded.site/vexo/logo.png">
+    <title> Git Tricks | 星际穿越 </title>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/btmills/geopattern/js/geopattern.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"> <!-- MathJax support START -->
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      }); </script>
+    <script type="text/x-mathjax-config"> MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      }); </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <!-- MathJax support END -->
+    <meta name="generator" content="Hexo 4.2.1">
+</head>
+
+<body>
+    <header class="header fixed-header">
+        <div class="header-container"> <a class="home-link" href="/">
+                <div class="logo"></div> <span>星际穿越</span>
+            </a>
+            <ul class="right-list">
+                <li class="list-item"> <a href="/" class="item-link">首页</a> </li>
+                <li class="list-item"> <a href="/tags/" class="item-link">标签</a> </li>
+                <li class="list-item"> <a href="/archives/" class="item-link">归档</a> </li>
+                <li class="list-item"> <a href="/project/" class="item-link">GitHub项目</a> </li>
+                <li class="list-item"> <a href="/about/" class="item-link">关于我</a> </li>
+            </ul>
+            <div class="menu"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </div>
+            <div class="menu-mask">
+                <ul class="menu-list">
+                    <li class="menu-item"> <a href="/" class="menu-link">首页</a> </li>
+                    <li class="menu-item"> <a href="/tags/" class="menu-link">标签</a> </li>
+                    <li class="menu-item"> <a href="/archives/" class="menu-link">归档</a> </li>
+                    <li class="menu-item"> <a href="/project/" class="menu-link">GitHub项目</a> </li>
+                    <li class="menu-item"> <a href="/about/" class="menu-link">关于我</a> </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div id="article-banner">
+        <h2>Git Tricks</h2>
+        <p class="post-date">2025-03-20</p>
+        <div class="arrow-down"> <a href="javascript:;"></a> </div>
+    </div>
+    <main class="app-body flex-box"> <!-- Article START -->
+        <article class="post-article">
+            <section class="markdown-content">
+                <h2 id="git-alias"><a href="#git-alias" class="headerlink" title="git alias"></a>git alias</h2>
+                <h3 id="基操"><a href="#基操" class="headerlink" title="基操"></a>基操</h3>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git config --global alias.co checkout</span><br><span class="line">git config --global alias.br branch</span><br><span class="line">git config --global alias.ci commit</span><br><span class="line">git config --global alias.st status</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h3 id="从hashcode创建新分支-并switch"><a href="#从hashcode创建新分支-并switch" class="headerlink" title="从hashcode创建新分支, 并switch"></a>从hashcode创建新分支, 并switch</h3>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git ccb <span class="built_in">test</span>-ct 17c252234</span><br><span class="line"></span><br><span class="line"><span class="comment"># git branch -f 17c252234 test-ct</span></span><br><span class="line"><span class="comment"># git switch 17c252234</span></span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git config --global alias.ccb <span class="string">'!f() &#123; \</span></span><br><span class="line"><span class="string">  if [ $# -ne 2 ]; then \</span></span><br><span class="line"><span class="string">    echo "Usage: git setct &lt;branch-name&gt; &lt;commit-hash&gt;"; \</span></span><br><span class="line"><span class="string">    return 1; \</span></span><br><span class="line"><span class="string">  fi; \</span></span><br><span class="line"><span class="string">  if ! git rev-parse --verify "$2" &gt;/dev/null 2&gt;&amp;1; then \</span></span><br><span class="line"><span class="string">    echo "Error: Invalid commit hash '</span><span class="variable">$2</span><span class="string">'"; \</span></span><br><span class="line"><span class="string">    return 1; \</span></span><br><span class="line"><span class="string">  fi; \</span></span><br><span class="line"><span class="string">  git branch -f "$1" "$2" &amp;&amp; git switch "$1"; \</span></span><br><span class="line"><span class="string">&#125;; f'</span></span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h3 id="统一-智能选择-cherry-pick-rebase-continue-abort"><a href="#统一-智能选择-cherry-pick-rebase-continue-abort" class="headerlink" title="统一/智能选择 cherry-pick/rebase --continue/abort"></a>统一/智能选择 <code>cherry-pick/rebase --continue/abort</code></h3>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git ct</span><br><span class="line"><span class="comment"># git cherry-pick/rebase --continue</span></span><br><span class="line"></span><br><span class="line">git ab</span><br><span class="line"><span class="comment"># git cherry-pick/rebase --abort</span></span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <blockquote>
+                    <p>Since we add <code>&quot;$@&quot;</code> below, maybe different from directly invoke the commands.</p>
+                </blockquote>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git config --global alias.ct <span class="string">'!f() &#123; \</span></span><br><span class="line"><span class="string">  if git rev-parse --verify CHERRY_PICK_HEAD 2&gt; /dev/null; then \</span></span><br><span class="line"><span class="string">    git cherry-pick --continue "$@"; \</span></span><br><span class="line"><span class="string">  elif git rev-parse --verify REBASE_HEAD 2&gt; /dev/null; then \</span></span><br><span class="line"><span class="string">    git rebase --continue "$@"; \</span></span><br><span class="line"><span class="string">  else \</span></span><br><span class="line"><span class="string">    echo "Error: Not in rebase/cherry-pick state"; \</span></span><br><span class="line"><span class="string">    return 1; \</span></span><br><span class="line"><span class="string">  fi; \</span></span><br><span class="line"><span class="string">&#125;; f'</span></span><br><span class="line">git config --global alias.ab <span class="string">'!f() &#123; \</span></span><br><span class="line"><span class="string">  if git rev-parse --verify CHERRY_PICK_HEAD 2&gt; /dev/null; then \</span></span><br><span class="line"><span class="string">    git cherry-pick --abort "$@"; \</span></span><br><span class="line"><span class="string">  elif git rev-parse --verify REBASE_HEAD 2&gt; /dev/null; then \</span></span><br><span class="line"><span class="string">    git rebase --abort "$@"; \</span></span><br><span class="line"><span class="string">  else \</span></span><br><span class="line"><span class="string">    echo "Error: Not in rebase/cherry-pick state"; \</span></span><br><span class="line"><span class="string">    return 1; \</span></span><br><span class="line"><span class="string">  fi; \</span></span><br><span class="line"><span class="string">&#125;; f'</span></span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h2 id="git-全局设置-用户名和邮箱"><a href="#git-全局设置-用户名和邮箱" class="headerlink" title="git 全局设置 用户名和邮箱"></a>git 全局设置 用户名和邮箱</h2>
+                <p>要将 Git 配置改为全局配置，请在命令中添加 –global 参数。修改后的命令如下：</p>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git config --global user.name <span class="string">"liyongkang"</span></span><br><span class="line">git config --global user.email <span class="string">"liyongkang@licoded.site"</span></span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h3 id="​验证配置"><a href="#​验证配置" class="headerlink" title="​验证配置"></a>​验证配置</h3>
+                <p>运行以下命令检查是否生效：</p>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git config --list | grep user</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>输出应显示：</p>
+                <figure class="highlight plain">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">user.name&#x3D;liyongkang</span><br><span class="line">user.email&#x3D;liyongkang@licoded.site</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h2 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a>git log</h2>
+                <h3 id="按作者过滤"><a href="#按作者过滤" class="headerlink" title="按作者过滤"></a>按作者过滤</h3>
+                <figure class="highlight plain">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git log --oneline --author&#x3D;&quot;gao*&quot;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h3 id="打印日期"><a href="#打印日期" class="headerlink" title="打印日期"></a>打印日期</h3>
+                <h4 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h4>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git <span class="built_in">log</span> --oneline --pretty=format:<span class="string">"%h - %ad : %s"</span> --date=iso</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <blockquote>
+                    <p>2025-03-11 17:13:12 +0800<br>日期最后多了个 <code>+0800</code>，比较难受</p>
+                </blockquote>
+                <h4 id="方案二（推荐"><a href="#方案二（推荐" class="headerlink" title="方案二（推荐"></a>方案二（推荐</h4>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git <span class="built_in">log</span> --oneline --pretty=format:<span class="string">"%h - %ad : %s"</span></span><br><span class="line"></span><br><span class="line">git config --global log.date format:<span class="string">"%Y-%m-%d %H:%M:%S"</span></span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h2 id="lazygit-支持非主流git网站的链接跳转，比如公司内部部署的git"><a href="#lazygit-支持非主流git网站的链接跳转，比如公司内部部署的git" class="headerlink" title="lazygit 支持非主流git网站的链接跳转，比如公司内部部署的git"></a>lazygit 支持非主流git网站的链接跳转，比如公司内部部署的git</h2>
+                <p>配置文件中添加如下内容</p>
+                <ul>
+                    <li>MacOS：<code>~/Library/Application\ Support/lazygit/config.yml</code></li>
+                </ul>
+                <figure class="highlight yml">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">'partner-gitlab.mioffice.cn':</span> <span class="string">'gitlab:partner-gitlab.mioffice.cn'</span></span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h2 id="其他实用命令"><a href="#其他实用命令" class="headerlink" title="其他实用命令"></a>其他实用命令</h2>
+                <h3 id="变更"><a href="#变更" class="headerlink" title="变更"></a>变更</h3>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git ci --amend --reset-author --no-edit -a</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h3 id="同步远程分支情况到本地"><a href="#同步远程分支情况到本地" class="headerlink" title="同步远程分支情况到本地"></a>同步远程分支情况到本地</h3>
+                <blockquote>
+                    <p>适用情况：某个分支在远程被删除了，但是本地git log的时候还是有显示</p>
+                </blockquote>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git fetch --prune origin</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h3 id="push-到远程同名分支"><a href="#push-到远程同名分支" class="headerlink" title="push 到远程同名分支"></a>push 到远程同名分支</h3>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">git push -u origin $(git branch --show-current)</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+            </section> <!-- Tags START -->
+            <div class="tags"> <span>Tags:</span> <a href="/tags#git"> <span class="tag-code">git</span> </a> </div> <!-- Tags END --> <!-- 打赏 START --> <!-- 打赏 END --> <!-- 二维码 START --> <!-- 二维码 END --> <!-- No Comment -->
+        </article> <!-- Article END --> <!-- Catalog START --> <!-- Catalog END -->
+    </main>
+    <script>
+        (function() {
+            var url = 'https://www.licoded.top/git-tricks/';
+            var banner = ''
+            if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+                $('#article-banner').css({
+                    'background-image': 'url(' + banner + ')'
+                })
+            } else {
+                $('#article-banner').geopattern(url)
+            }
+            $('.header').removeClass('fixed-header')
+
+            // error image
+            $(".markdown-content img").on('error', function() {
+                $(this).css({
+                    'cursor': 'default'
+                })
+            })
+        })();
+    </script>
+    <div class="scroll-top"> <span class="arrow-icon"></span> </div>
+    <footer class="app-footer">
+        <p class="copyright"> <a href="https://beian.miit.gov.cn" target="_blank">豫ICP备19022147号</a> | &copy; 2025 All rights reserved. <br> Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/yanm1ng" target="_blank">yanm1ng</a> </p>
+    </footer>
+    <script>
+        function async (u, c) {
+            var d = document,
+                t = 'script',
+                o = d.createElement(t),
+                s = d.getElementsByTagName(t)[0];
+            o.src = u;
+            if (c) {
+                o.addEventListener('load', function(e) {
+                    c(null, e);
+                }, false);
+            }
+            s.parentNode.insertBefore(o, s);
+        }
+    </script>
+    <script>
+        async ("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function() {
+            FastClick.attach(document.body);
+        })
+    </script>
+    <script>
+        var hasLine = 'true';
+        async ("https://cdn.jsdelivr.net/npm/highlightjs@9.12.0/highlight.pack.min.js", function() {
+            $('figure pre').each(function(i, block) {
+                var figure = $(this).parents('figure');
+                if (hasLine === 'false') {
+                    figure.find('.gutter').hide();
+                }
+                var lang = figure.attr('class').split(' ')[1] || 'code';
+                var codeHtml = $(this).html();
+                var codeTag = document.createElement('code');
+                codeTag.className = lang;
+                codeTag.innerHTML = codeHtml;
+                $(this).attr('class', '').empty().html(codeTag);
+                figure.attr('data-lang', lang.toUpperCase());
+                hljs.highlightBlock(block);
+            });
+        })
+    </script> <!-- Baidu Tongji -->
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

@@ -7,7 +7,7 @@
     <meta name="description" content="记录和分享ACM和前端、Java、Python以及计算机课程的学习笔记">
     <meta name="keyword" content="hexo-theme, vuejs">
     <link rel="shortcut icon" type="image/ico" href="https://ghimg.licoded.site/vexo/logo.png">
-    <title> 关于我 | 星际穿越 </title>
+    <title> 星际穿越 </title>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/tomorrow.min.css" rel="stylesheet">
@@ -40,7 +40,7 @@
                 <div class="logo"></div> <span>星际穿越</span>
             </a>
             <ul class="right-list">
-                <li class="list-item"> <a href="/" class="item-link">首页</a> </li>
+                <li class="list-item"> <a href="/" class="item-link active">首页</a> </li>
                 <li class="list-item"> <a href="/tags/" class="item-link">标签</a> </li>
                 <li class="list-item"> <a href="/archives/" class="item-link">归档</a> </li>
                 <li class="list-item"> <a href="/project/" class="item-link">GitHub项目</a> </li>
@@ -49,7 +49,7 @@
             <div class="menu"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </div>
             <div class="menu-mask">
                 <ul class="menu-list">
-                    <li class="menu-item"> <a href="/" class="menu-link">首页</a> </li>
+                    <li class="menu-item"> <a href="/" class="menu-link mobile-active">首页</a> </li>
                     <li class="menu-item"> <a href="/tags/" class="menu-link">标签</a> </li>
                     <li class="menu-item"> <a href="/archives/" class="menu-link">归档</a> </li>
                     <li class="menu-item"> <a href="/project/" class="menu-link">GitHub项目</a> </li>
@@ -58,26 +58,14 @@
             </div>
         </div>
     </header>
-    <div id="about-banner" style="background-image: url(https://ghimg.licoded.site/vexo/about-cover.jpeg)"></div>
-    <div class="author">
-        <div class="head"> <img src="https://ghimg.licoded.site/vexo/avator.jpeg"> </div>
-        <h3>Licoded</h3>
-        <p class="description">Talk is cheap, show me the code!</p>
-        <section class="share-icons"> <a class="icon-github" href="https://github.com/Licoded" target="_blank"> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-github fa-stack-1x fa-inverse"></i> </span> </a> <a class="icon-zhihu" href="https://www.zhihu.com/people/yummy1121" target="_blank"> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-stack-1x fa-inverse">知</i> </span> </a> </section>
-    </div>
-    <script>
-        (function() {
-            $('.header').removeClass('fixed-header')
-            var windowH = $(window).height();
-            var author = $('.author')
-            var bodyH = author.offset().top + author[0].offsetHeight + 71;
-            if (bodyH < windowH) {
-                author.css({
-                    'margin-bottom': windowH - bodyH
-                })
-            }
-        })();
-    </script>
+    <main class="app-body">
+        <article class="article-card">
+            <h2 class="article-head"> <a href="/win10-mysql-install/">win10 mysql-5.7.28x64位安装</a> </h2>
+            <p class="article-date">2020年3月19日</p>
+            <div class="article-summary"> 下载和安装从 mysql官网 下载安装包，如下图所示 将 MySQL 解压到自定义的位置，然后在环境变量 Path 中添加 MySQL 解压后的 bin 目录所在的路径，比如我的是：D:\mysql-5.7.28-winx64\bin。 以管理员身份执行下面的命令安装 mysql 服务并 ... </div> <a class="more" href="/win10-mysql-install/">阅读全文</a>
+        </article>
+        <div class="guide-pager"> <a href="/page/2/"><span class="page-arrow">← </span>Prev</a> <a class="unvisible" href="/">Next <span class="page-arrow">→</span></a> </div>
+    </main>
     <div class="scroll-top"> <span class="arrow-icon"></span> </div>
     <footer class="app-footer">
         <p class="copyright"> <a href="https://beian.miit.gov.cn" target="_blank">豫ICP备19022147号</a> | &copy; 2025 All rights reserved. <br> Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/yanm1ng" target="_blank">yanm1ng</a> </p>

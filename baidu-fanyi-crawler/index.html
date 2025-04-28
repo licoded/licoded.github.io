@@ -7,7 +7,7 @@
     <meta name="description" content="记录和分享ACM和前端、Java、Python以及计算机课程的学习笔记">
     <meta name="keyword" content="hexo-theme, vuejs">
     <link rel="shortcut icon" type="image/ico" href="https://ghimg.licoded.site/vexo/logo.png">
-    <title> 关于我 | 星际穿越 </title>
+    <title> 百度翻译爬虫—定时自动爬取昨日收藏单词 | 星际穿越 </title>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/tomorrow.min.css" rel="stylesheet">
@@ -58,24 +58,82 @@
             </div>
         </div>
     </header>
-    <div id="about-banner" style="background-image: url(https://ghimg.licoded.site/vexo/about-cover.jpeg)"></div>
-    <div class="author">
-        <div class="head"> <img src="https://ghimg.licoded.site/vexo/avator.jpeg"> </div>
-        <h3>Licoded</h3>
-        <p class="description">Talk is cheap, show me the code!</p>
-        <section class="share-icons"> <a class="icon-github" href="https://github.com/Licoded" target="_blank"> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-github fa-stack-1x fa-inverse"></i> </span> </a> <a class="icon-zhihu" href="https://www.zhihu.com/people/yummy1121" target="_blank"> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-stack-1x fa-inverse">知</i> </span> </a> </section>
+    <div id="article-banner">
+        <h2>百度翻译爬虫—定时自动爬取昨日收藏单词</h2>
+        <p class="post-date">2022-01-06</p>
+        <div class="arrow-down"> <a href="javascript:;"></a> </div>
     </div>
+    <main class="app-body flex-box"> <!-- Article START -->
+        <article class="post-article">
+            <section class="markdown-content">
+                <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2>
+                <p>使用 GitHub Actions 实现每天定时爬取昨日收藏的单词。</p>
+                <blockquote>
+                    <p>爬取的数据以 <code>json</code> 格式存储在 <code>data</code> 文件夹中。</p>
+                </blockquote>
+                <p><em><strong>欢迎通过 <a href="https://github.com/licoded/BaiduFanyi_Crawler/issues" target="_blank" rel="noopener">issues</a> 提交bug及改进建议。</strong></em></p>
+                <h2 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h2>
+                <h3 id="1-fork-本仓库"><a href="#1-fork-本仓库" class="headerlink" title="1. fork 本仓库"></a>1. fork 本仓库</h3>
+                <h3 id="2-获取-cookie"><a href="#2-获取-cookie" class="headerlink" title="2. 获取 cookie"></a>2. 获取 cookie</h3>
+                <ul>
+                    <li>访问<a href="https://fanyi.baidu.com/" target="_blank" rel="noopener">百度翻译</a>，右键菜单选择 <code>Inspect/检查</code> 打开devtools控制台</li>
+                    <li>选择 <code>Network/网络</code> 栏</li>
+                    <li>选择 <code>Fetch/XHR</code> 筛选项</li>
+                    <li>在过滤输入框中输入 <code>transapi</code></li>
+                    <li>在网页输入框中输入任意内容，以触发翻译请求</li>
+                    <li>在devtools控制台点击 <code>v2transapi</code> 开头的请求</li>
+                    <li>然后向下滚动，找到 <code>Request Headers &gt; Cookie</code>，点击右键后选择 <code>Copy/复制</code> 即可</li>
+                </ul>
+                <p><img src="https://ghimg.licoded.site/picgo/01.get_cookie_cut.gif" alt="get_cookie"></p>
+                <h3 id="3-设置-action-secrets"><a href="#3-设置-action-secrets" class="headerlink" title="3. 设置 action secrets"></a>3. 设置 action secrets</h3>
+                <ul>
+                    <li>进入 <strong>Settings</strong> 页面</li>
+                    <li>侧边栏选择 <code>Secrets &gt; Actions</code></li>
+                    <li>点击 <strong>New repository secret</strong>
+                        <ul>
+                            <li><strong>Name</strong>栏，输入 BAIDU_COOKIE</li>
+                            <li><strong>Secret</strong>栏，粘贴从浏览器控制台获取的cookie（这里直接粘贴，不加单引号）</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p><img src="https://ghimg.licoded.site/picgo/03.set_secrets_cut.gif" alt="set_secrets"></p>
+                <h2 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h2>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line"><span class="built_in">export</span> BAIDU_COOKIE=<span class="string">'你的cookie'</span> <span class="comment"># 注意这里有单引号</span></span><br><span class="line">npm install</span><br><span class="line">npm run dev</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p><img src="https://ghimg.licoded.site/picgo/02.local_run_cut.gif" alt="local_run"></p>
+            </section> <!-- Tags START -->
+            <div class="tags"> <span>Tags:</span> <a href="/tags#NodeJS"> <span class="tag-code">NodeJS</span> </a> <a href="/tags#Crawler"> <span class="tag-code">Crawler</span> </a> <a href="/tags#Baidu Fanyi"> <span class="tag-code">Baidu Fanyi</span> </a> <a href="/tags#English Study"> <span class="tag-code">English Study</span> </a> </div> <!-- Tags END --> <!-- 打赏 START --> <!-- 打赏 END --> <!-- 二维码 START --> <!-- 二维码 END --> <!-- No Comment -->
+        </article> <!-- Article END --> <!-- Catalog START --> <!-- Catalog END -->
+    </main>
     <script>
         (function() {
-            $('.header').removeClass('fixed-header')
-            var windowH = $(window).height();
-            var author = $('.author')
-            var bodyH = author.offset().top + author[0].offsetHeight + 71;
-            if (bodyH < windowH) {
-                author.css({
-                    'margin-bottom': windowH - bodyH
+            var url = 'https://www.licoded.top/baidu-fanyi-crawler/';
+            var banner = ''
+            if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+                $('#article-banner').css({
+                    'background-image': 'url(' + banner + ')'
                 })
+            } else {
+                $('#article-banner').geopattern(url)
             }
+            $('.header').removeClass('fixed-header')
+
+            // error image
+            $(".markdown-content img").on('error', function() {
+                $(this).css({
+                    'cursor': 'default'
+                })
+            })
         })();
     </script>
     <div class="scroll-top"> <span class="arrow-icon"></span> </div>

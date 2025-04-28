@@ -7,7 +7,7 @@
     <meta name="description" content="记录和分享ACM和前端、Java、Python以及计算机课程的学习笔记">
     <meta name="keyword" content="hexo-theme, vuejs">
     <link rel="shortcut icon" type="image/ico" href="https://ghimg.licoded.site/vexo/logo.png">
-    <title> vmware固定IP | 星际穿越 </title>
+    <title> 用 acme.sh 库实现 Let&#39;s Encrypt免费泛域名SSL证书申请 | 星际穿越 </title>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/tomorrow.min.css" rel="stylesheet">
@@ -59,74 +59,63 @@
         </div>
     </header>
     <div id="article-banner">
-        <h2>vmware固定IP</h2>
-        <p class="post-date">2020-11-07</p>
+        <h2>用 acme.sh 库实现 Let's Encrypt免费泛域名SSL证书申请</h2>
+        <p class="post-date">2025-04-07</p>
         <div class="arrow-down"> <a href="javascript:;"></a> </div>
     </div>
     <main class="app-body flex-box"> <!-- Article START -->
         <article class="post-article">
             <section class="markdown-content">
+                <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2>
                 <blockquote>
-                    <p>不想再windows上装mysql，所以就装在了vmware虚拟机上。但vmware虚拟的ip地址是固定分配的，这就意味着我每次开机都要在配置文件上换一次ip地址，太麻烦了。我作为一条懒狗加强迫症晚期患者根本忍不了，于是就百度+谷歌折腾了大概一上午，然后有了这篇博客</p>
+                    <ul>
+                        <li><a href="https://juejin.cn/post/7136001093720342542" target="_blank" rel="noopener">Let’s Encrypt免费泛域名SSL证书申请及自动续签 – 掘金</a></li>
+                        <li><a href="https://www.cnblogs.com/dirgo/p/18129437" target="_blank" rel="noopener">阿里云域名使用ssl域名证书自动续期工具acme.sh报错Error add txt for domain:_acme-challenge.yourdomain.com – 博客园</a> </li>
+                        <li><a href="https://github.com/acmesh-official/acme.sh/wiki/dnsapi#dns_ali" target="_blank" rel="noopener">11. Use Aliyun domain API to automatically issue cert</a></li>
+                    </ul>
                 </blockquote>
-                <ol>
-                    <li>
-                        <p>打开VMware的编辑-虚拟网络编辑器，点击更改设置</p>
-                        <p><img src="https://ghimg.licoded.site/picgo/20201107170726.png" alt="01"></p>
-                    </li>
-                </ol>
-                <ol start="2">
-                    <li>
-                        <p>选择类型为NAT模式的那一项，点击下面的NAT设置</p>
-                        <p><img src="https://ghimg.licoded.site/picgo/20201107171123.png" alt="02"></p>
-                    </li>
-                    <li>
-                        <p>修改网关（只能修改4为ip地址的最后一位，并且不能和子网IP的冲突）</p>
-                        <p>然后一定不要忘记，点击确定，点击应用，点击确定</p>
-                        <p><img src="https://ghimg.licoded.site/picgo/20201107171313.png" alt="03"></p>
-                        <p><img src="https://ghimg.licoded.site/picgo/20201107171331.png" alt="04"></p>
-                    </li>
-                    <li>
-                        <p>开启你要固定ip地址的虚拟机</p>
-                    </li>
-                    <li>
-                        <p>查看网卡名字<code>ifconfig</code></p>
-                        <p><img src="https://ghimg.licoded.site/picgo/20201107171714.png" alt="01_ifconfig"></p>
-                        <p>记住带有“RUNNING”字样的网卡的名字，如上图</p>
-                        <p>一般Centos是eth0或eth1，Ubuntu是ens33</p>
-                    </li>
-                    <li>
-                        <p>修改interfaces配置<code>sudo vim /etc/network/interfaces</code></p>
-                        <p>在文件末尾添加下面内容</p>
-                        <figure class="highlight plain">
-                            <table>
-                                <tr>
-                                    <td class="gutter">
-                                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
-                                    </td>
-                                    <td class="code">
-                                        <pre><span class="line">auto ens33						# 上一步查看的带有RUNNING字样的网卡名称</span><br><span class="line">iface ens33 inet static			# 上一步查看的带有RUNNING字样的网卡名称</span><br><span class="line">address 192.168.247.200			# 要设为的ip地址</span><br><span class="line">netmask 255.255.255.0			# 子网掩码，跟我一样就行了</span><br><span class="line">gateway 192.168.247.20			# 网关（要和第3步中修改的一样）</span><br><span class="line">dns-nameservers 180.76.76.76 	# dns，我这里用的百度的，可以自行更换</span><br></pre>
-                                    </td>
-                                </tr>
-                            </table>
-                        </figure>
-                        <p><img src="https://ghimg.licoded.site/picgo/20201107173426.png" alt="05"></p>
-                        <p>搞完执行<code>service network restart</code>重启网络服务就OK了，如果不行可以先重启一下虚拟机试试</p>
-                    </li>
-                    <li>
-                        <p>如果上面配置完没出问题就不用看这一步了</p>
-                        <p><code>sudo vim /etc/NetworkManager/NetworkManager.conf</code>如下图，修改managed=true</p>
-                        <p><img src="https://ghimg.licoded.site/picgo/20201107172718.png" alt="03_networkmanager"></p>
-                        <p>搞完重启一下虚拟机应该就好了</p>
-                    </li>
-                </ol>
+                <h2 id="阿里云配置"><a href="#阿里云配置" class="headerlink" title="阿里云配置"></a>阿里云配置</h2>
+                <p>新建的 RAM 用户 默认没有任何权限，需要手动添加。</p>
+                <h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3>
+                <p>登录阿里云工作台—进入 “RAM 访问控制” —身份管理–用户—找到 用户— 点击用户名–点击“权限管理”tab页，可查看已授权的权限（直接点击用户列表操作栏的添加权限是看不到已有权限的）</p>
+                <p>添加以下两个权限：</p>
+                <ul>
+                    <li>AliyunDomainFullAccess 管理域名服务的权限</li>
+                    <li>AliyunDNSFullAccess 管理云解析(DNS)的权限</li>
+                </ul>
+                <h2 id="执行脚本"><a href="#执行脚本" class="headerlink" title="执行脚本"></a>执行脚本</h2>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">curl https://get.acme.sh | sh -s email=busy.li@foxmail.com</span><br><span class="line">./acme.sh --<span class="built_in">set</span>-default-ca --server letsencrypt</span><br><span class="line"><span class="built_in">export</span> Ali_Key=<span class="string">"sdfsdfsdfljlbjkljlkjsdfoiwje"</span></span><br><span class="line"><span class="built_in">export</span> Ali_Secret=<span class="string">"jlsdflanljkljlfdsaklkjflsa"</span></span><br><span class="line"><span class="comment"># 执行下面一行后，上面的Ali_Key、Ali_Secret会自动写入~/.acme.sh/account.conf</span></span><br><span class="line">./acme.sh --issue --dns dns_ali --nginx -d licoded.site -w /root/blog/licoded.github.io</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>最终 <code>~/.acme.sh/account.conf</code> 的内容如下：</p>
+                <figure class="highlight plain">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">LOG_FILE&#x3D;&#39;&#x2F;root&#x2F;.acme.sh&#x2F;acme.sh.log&#39;</span><br><span class="line">#LOG_LEVEL&#x3D;1</span><br><span class="line"></span><br><span class="line">#AUTO_UPGRADE&#x3D;&quot;1&quot;</span><br><span class="line"></span><br><span class="line">#NO_TIMESTAMP&#x3D;1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ACCOUNT_EMAIL&#x3D;&#39;busy.li@foxmail.com&#39;</span><br><span class="line">UPGRADE_HASH&#x3D;&#39;fafafafafafafaf&#39;</span><br><span class="line">DEFAULT_ACME_SERVER&#x3D;&#39;https:&#x2F;&#x2F;acme-v02.api.letsencrypt.org&#x2F;directory&#39;</span><br><span class="line"></span><br><span class="line">SAVED_Ali_Key&#x3D;&#39;fafafafafafafaf&#39;</span><br><span class="line">SAVED_Ali_Secret&#x3D;&#39;fafafafafafafaf&#39;</span><br><span class="line">USER_PATH&#x3D;&#39;fafafafafafafaf&#39;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
             </section> <!-- Tags START -->
-            <div class="tags"> <span>Tags:</span> <a href="/tags#工具使用"> <span class="tag-code">工具使用</span> </a> </div> <!-- Tags END --> <!-- 打赏 START --> <!-- 打赏 END --> <!-- 二维码 START --> <!-- 二维码 END --> <!-- No Comment -->
+            <div class="tags"> <span>Tags:</span> <a href="/tags#acme.sh"> <span class="tag-code">acme.sh</span> </a> <a href="/tags#Let&#39;s Encrypt"> <span class="tag-code">Let&#39;s Encrypt</span> </a> <a href="/tags#SSL证书"> <span class="tag-code">SSL证书</span> </a> </div> <!-- Tags END --> <!-- 打赏 START --> <!-- 打赏 END --> <!-- 二维码 START --> <!-- 二维码 END --> <!-- No Comment -->
         </article> <!-- Article END --> <!-- Catalog START --> <!-- Catalog END -->
     </main>
     <script>
         (function() {
-            var url = 'https://www.licoded.top/vmware-immutable-ip/';
+            var url = 'https://www.licoded.top/acme-sh-ssl-apply/';
             var banner = ''
             if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
                 $('#article-banner').css({

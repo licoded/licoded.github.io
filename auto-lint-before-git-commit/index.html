@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" name="viewport">
+    <meta name="description" content="记录和分享ACM和前端、Java、Python以及计算机课程的学习笔记">
+    <meta name="keyword" content="hexo-theme, vuejs">
+    <link rel="shortcut icon" type="image/ico" href="https://ghimg.licoded.site/vexo/logo.png">
+    <title> 前端项目 git-commit 前自动格式化代码 | 星际穿越 </title>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/btmills/geopattern/js/geopattern.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"> <!-- MathJax support START -->
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      }); </script>
+    <script type="text/x-mathjax-config"> MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      }); </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <!-- MathJax support END -->
+    <meta name="generator" content="Hexo 4.2.1">
+</head>
+
+<body>
+    <header class="header fixed-header">
+        <div class="header-container"> <a class="home-link" href="/">
+                <div class="logo"></div> <span>星际穿越</span>
+            </a>
+            <ul class="right-list">
+                <li class="list-item"> <a href="/" class="item-link">首页</a> </li>
+                <li class="list-item"> <a href="/tags/" class="item-link">标签</a> </li>
+                <li class="list-item"> <a href="/archives/" class="item-link">归档</a> </li>
+                <li class="list-item"> <a href="/project/" class="item-link">GitHub项目</a> </li>
+                <li class="list-item"> <a href="/about/" class="item-link">关于我</a> </li>
+            </ul>
+            <div class="menu"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </div>
+            <div class="menu-mask">
+                <ul class="menu-list">
+                    <li class="menu-item"> <a href="/" class="menu-link">首页</a> </li>
+                    <li class="menu-item"> <a href="/tags/" class="menu-link">标签</a> </li>
+                    <li class="menu-item"> <a href="/archives/" class="menu-link">归档</a> </li>
+                    <li class="menu-item"> <a href="/project/" class="menu-link">GitHub项目</a> </li>
+                    <li class="menu-item"> <a href="/about/" class="menu-link">关于我</a> </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div id="article-banner">
+        <h2>前端项目 git-commit 前自动格式化代码</h2>
+        <p class="post-date">2025-02-25</p>
+        <div class="arrow-down"> <a href="javascript:;"></a> </div>
+    </div>
+    <main class="app-body flex-box"> <!-- Article START -->
+        <article class="post-article">
+            <section class="markdown-content">
+                <h2 id="命令-amp-配置"><a href="#命令-amp-配置" class="headerlink" title="命令&amp;配置"></a>命令&amp;配置</h2>
+                <figure class="highlight bash">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">pnpm install -D simple-git-hooks</span><br><span class="line">pnpm install -D lint-staged</span><br><span class="line"></span><br><span class="line"><span class="comment"># enable git hooks</span></span><br><span class="line">npx simple-git-hooks</span><br><span class="line">cat .git/hooks/pre-commit <span class="comment"># check</span></span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <blockquote>
+                    <p><code>package.json</code></p>
+                </blockquote>
+                <figure class="highlight json">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"simple-git-hooks"</span>: &#123;</span><br><span class="line">    <span class="attr">"pre-commit"</span>: <span class="string">"npx lint-staged"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"lint-staged"</span>: &#123;</span><br><span class="line">    <span class="attr">"*.&#123;js,jsx,ts,tsx&#125;"</span>: [</span><br><span class="line">      <span class="string">"npx eslint --fix"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h2 id="额外配置-prettier"><a href="#额外配置-prettier" class="headerlink" title="额外配置 prettier"></a>额外配置 prettier</h2>
+                <blockquote>
+                    <p><code>.prettierrc</code></p>
+                </blockquote>
+                <figure class="highlight plain">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">&#123;</span><br><span class="line">  &quot;arrowParens&quot;: &quot;always&quot;,</span><br><span class="line">  &quot;bracketSpacing&quot;: true,</span><br><span class="line">  &quot;bracketSameLine&quot;: false,</span><br><span class="line">  &quot;printWidth&quot;: 80,</span><br><span class="line">  &quot;proseWrap&quot;: &quot;always&quot;,</span><br><span class="line">  &quot;semi&quot;: true,</span><br><span class="line">  &quot;singleQuote&quot;: true,</span><br><span class="line">  &quot;tabWidth&quot;: 2,</span><br><span class="line">  &quot;trailingComma&quot;: &quot;all&quot;,</span><br><span class="line">  &quot;useTabs&quot;: false</span><br><span class="line">&#125;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <blockquote>
+                    <p><code>.prettierignore</code></p>
+                </blockquote>
+                <figure class="highlight plain">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">pnpm-lock.yaml</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <blockquote>
+                    <p><code>package.json</code></p>
+                </blockquote>
+                <figure class="highlight json">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"simple-git-hooks"</span>: &#123;</span><br><span class="line">    <span class="attr">"pre-commit"</span>: <span class="string">"npx pretty-quick --staged &amp;&amp; npx lint-staged"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"lint-staged"</span>: &#123;</span><br><span class="line">    <span class="attr">"*.&#123;js,jsx,ts,tsx&#125;"</span>: [</span><br><span class="line">      <span class="string">"npx eslint --fix"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <h2 id="package-json-完整示例"><a href="#package-json-完整示例" class="headerlink" title="package.json 完整示例"></a><code>package.json</code> 完整示例</h2>
+                <figure class="highlight json">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"my-react-movies"</span>,</span><br><span class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.0.0"</span>,</span><br><span class="line">  <span class="attr">"type"</span>: <span class="string">"module"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"dev"</span>: <span class="string">"vite"</span>,</span><br><span class="line">    <span class="attr">"build"</span>: <span class="string">"tsc -b &amp;&amp; vite build"</span>,</span><br><span class="line">    <span class="attr">"lint"</span>: <span class="string">"eslint ."</span>,</span><br><span class="line">    <span class="attr">"preview"</span>: <span class="string">"vite preview"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"simple-git-hooks"</span>: &#123;</span><br><span class="line">    <span class="attr">"pre-commit"</span>: <span class="string">"npx pretty-quick --staged &amp;&amp; npx lint-staged"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"lint-staged"</span>: &#123;</span><br><span class="line">    <span class="attr">"*.&#123;js,jsx,ts,tsx&#125;"</span>: [</span><br><span class="line">      <span class="string">"npx eslint --fix"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"@tailwindcss/vite"</span>: <span class="string">"^4.0.3"</span>,</span><br><span class="line">    <span class="attr">"appwrite"</span>: <span class="string">"^17.0.0"</span>,</span><br><span class="line">    <span class="attr">"react"</span>: <span class="string">"^18.3.1"</span>,</span><br><span class="line">    <span class="attr">"react-dom"</span>: <span class="string">"^18.3.1"</span>,</span><br><span class="line">    <span class="attr">"tailwindcss"</span>: <span class="string">"^4.0.3"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"@eslint/js"</span>: <span class="string">"^9.17.0"</span>,</span><br><span class="line">    <span class="attr">"@types/react"</span>: <span class="string">"^18.3.18"</span>,</span><br><span class="line">    <span class="attr">"@types/react-dom"</span>: <span class="string">"^18.3.5"</span>,</span><br><span class="line">    <span class="attr">"@vitejs/plugin-react"</span>: <span class="string">"^4.3.4"</span>,</span><br><span class="line">    <span class="attr">"eslint"</span>: <span class="string">"^9.17.0"</span>,</span><br><span class="line">    <span class="attr">"eslint-plugin-react-hooks"</span>: <span class="string">"^5.0.0"</span>,</span><br><span class="line">    <span class="attr">"eslint-plugin-react-refresh"</span>: <span class="string">"^0.4.16"</span>,</span><br><span class="line">    <span class="attr">"globals"</span>: <span class="string">"^15.14.0"</span>,</span><br><span class="line">    <span class="attr">"lint-staged"</span>: <span class="string">"^15.4.3"</span>,</span><br><span class="line">    <span class="attr">"prettier"</span>: <span class="string">"3.4.2"</span>,</span><br><span class="line">    <span class="attr">"pretty-quick"</span>: <span class="string">"4.0.0"</span>,</span><br><span class="line">    <span class="attr">"simple-git-hooks"</span>: <span class="string">"^2.11.1"</span>,</span><br><span class="line">    <span class="attr">"typescript"</span>: <span class="string">"~5.6.2"</span>,</span><br><span class="line">    <span class="attr">"typescript-eslint"</span>: <span class="string">"^8.18.2"</span>,</span><br><span class="line">    <span class="attr">"vite"</span>: <span class="string">"^6.0.5"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+            </section> <!-- Tags START -->
+            <div class="tags"> <span>Tags:</span> <a href="/tags#JavaScript"> <span class="tag-code">JavaScript</span> </a> <a href="/tags#ESLint"> <span class="tag-code">ESLint</span> </a> <a href="/tags#git"> <span class="tag-code">git</span> </a> </div> <!-- Tags END --> <!-- 打赏 START --> <!-- 打赏 END --> <!-- 二维码 START --> <!-- 二维码 END --> <!-- No Comment -->
+        </article> <!-- Article END --> <!-- Catalog START --> <!-- Catalog END -->
+    </main>
+    <script>
+        (function() {
+            var url = 'https://www.licoded.top/auto-lint-before-git-commit/';
+            var banner = ''
+            if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+                $('#article-banner').css({
+                    'background-image': 'url(' + banner + ')'
+                })
+            } else {
+                $('#article-banner').geopattern(url)
+            }
+            $('.header').removeClass('fixed-header')
+
+            // error image
+            $(".markdown-content img").on('error', function() {
+                $(this).css({
+                    'cursor': 'default'
+                })
+            })
+        })();
+    </script>
+    <div class="scroll-top"> <span class="arrow-icon"></span> </div>
+    <footer class="app-footer">
+        <p class="copyright"> <a href="https://beian.miit.gov.cn" target="_blank">豫ICP备19022147号</a> | &copy; 2025 All rights reserved. <br> Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/yanm1ng" target="_blank">yanm1ng</a> </p>
+    </footer>
+    <script>
+        function async (u, c) {
+            var d = document,
+                t = 'script',
+                o = d.createElement(t),
+                s = d.getElementsByTagName(t)[0];
+            o.src = u;
+            if (c) {
+                o.addEventListener('load', function(e) {
+                    c(null, e);
+                }, false);
+            }
+            s.parentNode.insertBefore(o, s);
+        }
+    </script>
+    <script>
+        async ("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function() {
+            FastClick.attach(document.body);
+        })
+    </script>
+    <script>
+        var hasLine = 'true';
+        async ("https://cdn.jsdelivr.net/npm/highlightjs@9.12.0/highlight.pack.min.js", function() {
+            $('figure pre').each(function(i, block) {
+                var figure = $(this).parents('figure');
+                if (hasLine === 'false') {
+                    figure.find('.gutter').hide();
+                }
+                var lang = figure.attr('class').split(' ')[1] || 'code';
+                var codeHtml = $(this).html();
+                var codeTag = document.createElement('code');
+                codeTag.className = lang;
+                codeTag.innerHTML = codeHtml;
+                $(this).attr('class', '').empty().html(codeTag);
+                figure.attr('data-lang', lang.toUpperCase());
+                hljs.highlightBlock(block);
+            });
+        })
+    </script> <!-- Baidu Tongji -->
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

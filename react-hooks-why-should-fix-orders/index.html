@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" name="viewport">
+    <meta name="description" content="记录和分享ACM和前端、Java、Python以及计算机课程的学习笔记">
+    <meta name="keyword" content="hexo-theme, vuejs">
+    <link rel="shortcut icon" type="image/ico" href="https://ghimg.licoded.site/vexo/logo.png">
+    <title> react hooks（比如useState）为什么需要保证调用顺序 | 星际穿越 </title>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/btmills/geopattern/js/geopattern.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"> <!-- MathJax support START -->
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      }); </script>
+    <script type="text/x-mathjax-config"> MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      }); </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <!-- MathJax support END -->
+    <meta name="generator" content="Hexo 4.2.1">
+</head>
+
+<body>
+    <header class="header fixed-header">
+        <div class="header-container"> <a class="home-link" href="/">
+                <div class="logo"></div> <span>星际穿越</span>
+            </a>
+            <ul class="right-list">
+                <li class="list-item"> <a href="/" class="item-link">首页</a> </li>
+                <li class="list-item"> <a href="/tags/" class="item-link">标签</a> </li>
+                <li class="list-item"> <a href="/archives/" class="item-link">归档</a> </li>
+                <li class="list-item"> <a href="/project/" class="item-link">GitHub项目</a> </li>
+                <li class="list-item"> <a href="/about/" class="item-link">关于我</a> </li>
+            </ul>
+            <div class="menu"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </div>
+            <div class="menu-mask">
+                <ul class="menu-list">
+                    <li class="menu-item"> <a href="/" class="menu-link">首页</a> </li>
+                    <li class="menu-item"> <a href="/tags/" class="menu-link">标签</a> </li>
+                    <li class="menu-item"> <a href="/archives/" class="menu-link">归档</a> </li>
+                    <li class="menu-item"> <a href="/project/" class="menu-link">GitHub项目</a> </li>
+                    <li class="menu-item"> <a href="/about/" class="menu-link">关于我</a> </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div id="article-banner">
+        <h2>react hooks（比如useState）为什么需要保证调用顺序</h2>
+        <p class="post-date">2025-04-08</p>
+        <div class="arrow-down"> <a href="javascript:;"></a> </div>
+    </div>
+    <main class="app-body flex-box"> <!-- Article START -->
+        <article class="post-article">
+            <section class="markdown-content">
+                <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2>
+                <blockquote>
+                    <ul>
+                        <li><a href="https://cloud.tencent.com/developer/article/1894850" target="_blank" rel="noopener">第八篇：深入 React-Hooks 工作机制：“原则”的背后，是“原理” – 腾讯云</a> 作者：<a href="https://cloud.tencent.com/developer/user/7992912" target="_blank" rel="noopener">越陌度阡</a></li>
+                        <li><a href="https://cloud.tencent.com/developer/article/1629182" target="_blank" rel="noopener">ReactHooks源码解析之useState及为什么useState要按顺序执行</a> 作者：<a href="https://cloud.tencent.com/developer/user/6176000" target="_blank" rel="noopener">进击的小进进</a></li>
+                        <li><a href="https://overreacted.io/why-do-hooks-rely-on-call-order/" target="_blank" rel="noopener">Why Do React Hooks Rely on Call Order? – overreacted</a></li>
+                    </ul>
+                </blockquote>
+                <h2 id="面试回答"><a href="#面试回答" class="headerlink" title="面试回答"></a>面试回答</h2>
+                <ul>
+                    <li>调用链路：<code>useState-&gt;mountState-&gt;mountWorkInProgressHook</code>
+                        <ul>
+                            <li>从 <code>mountWorkInProgressHook</code> 函数源码中，可以看出<ul>
+                                    <li>hook 对象之间以单向链表的形式相互串联</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>而后续状态更新（二次渲染）时执行的 <code>updateState-&gt;updateReducer-&gt;updateWorkInProgressHook</code> 函数<ul>
+                            <li><code>updateState</code> 调用了 <code>updateReducer</code>，所以更新时是把 state 当作/等同于 reducer 来处理的</li>
+                            <li>从 <code>updateWorkInProgressHook</code> 函数源码中，可以看出<ul>
+                                    <li>会按顺序去遍历之前构建好的链表，取出对应的数据信息进行渲染</li>
+                                    <li>注意这个过程就像从数组中依次取值一样，是完全按照顺序（或者说索引）来的</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="https://github.com/licoded/25Apr_MainPlan/issues/7#issuecomment-2784847361" target="_blank" rel="noopener">为什么用by order的方式，其他方案的问题</a></li>
+                </ul>
+                <h1 id="以-useState-为例，分析-React-Hooks-的调用链路"><a href="#以-useState-为例，分析-React-Hooks-的调用链路" class="headerlink" title="以 useState 为例，分析 React-Hooks 的调用链路"></a>以 useState 为例，分析 React-Hooks 的调用链路</h1>
+                <h2 id="首次渲染"><a href="#首次渲染" class="headerlink" title="首次渲染"></a>首次渲染</h2>
+                <p>在首次渲染的流程中，<code>useState</code> 触发的一系列操作最后会落到 <code>mountState</code> 里面去，所以我们重点需要关注的就是 <code>mountState</code> 做了什么事情</p>
+                <p><code>mounState</code> 的主要工作是初始化 Hooks。在整段源码中，最需要关注的是 <code>mountWorkInProgressHook</code> 方法，它为我们道出了 Hooks 背后的数据结构组织形式。以下是 <code>mountWorkInProgressHook</code> 方法的源码：</p>
+                <figure class="highlight js">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mountWorkInProgressHook</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 注意，单个 hook 是以对象的形式存在的</span></span><br><span class="line">  <span class="keyword">var</span> hook = &#123;</span><br><span class="line">    memoizedState: <span class="literal">null</span>,</span><br><span class="line">    baseState: <span class="literal">null</span>,</span><br><span class="line">    baseQueue: <span class="literal">null</span>,</span><br><span class="line">    queue: <span class="literal">null</span>,</span><br><span class="line">    next: <span class="literal">null</span></span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (workInProgressHook === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="comment">// 这行代码每个 React 版本不太一样，但做的都是同一件事：将 hook 作为链表的头节点处理</span></span><br><span class="line">    firstWorkInProgressHook = workInProgressHook = hook;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 若链表不为空，则将 hook 追加到链表尾部</span></span><br><span class="line">    workInProgressHook = workInProgressHook.next = hook;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 返回当前的 hook</span></span><br><span class="line">  <span class="keyword">return</span> workInProgressHook;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>hook 相关的所有信息收敛在一个 hook 对象里，而 hook 对象之间以单向链表的形式相互串联。 </p>
+                <h2 id="更新（二次渲染）"><a href="#更新（二次渲染）" class="headerlink" title="更新（二次渲染）"></a>更新（二次渲染）</h2>
+                <p>首次渲染和更新渲染的区别，在于调用的是 mountState，还是 updateState。mountState 做了什么，你已经非常清楚了；而 updateState 之后的操作链路，虽然涉及的代码有很多，但其实做的事情很容易理解：按顺序去遍历之前构建好的链表，取出对应的数据信息进行渲染。</p>
+                <p>调用链路：<code>updateState-&gt;updateReducer-&gt;updateWorkInProgressHook</code><br><em><strong>下面代码比较复杂，建议跳过</strong></em></p>
+                <figure class="highlight js">
+                    <table>
+                        <tr>
+                            <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre>
+                            </td>
+                            <td class="code">
+                                <pre><span class="line"><span class="comment">//当前正在 update 的 fiber 上的 hook</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateWorkInProgressHook</span>(<span class="params"></span>): <span class="title">Hook</span> </span>&#123;</span><br><span class="line">  <span class="comment">// This function is used both for updates and for re-renders triggered by a</span></span><br><span class="line">  <span class="comment">// render phase update. It assumes there is either a current hook we can</span></span><br><span class="line">  <span class="comment">// clone, or a work-in-progress hook from a previous render pass that we can</span></span><br><span class="line">  <span class="comment">// use as a base. When we reach the end of the base list, we must switch to</span></span><br><span class="line">  <span class="comment">// the dispatcher used for mounts.</span></span><br><span class="line">  <span class="keyword">if</span> (nextWorkInProgressHook !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="comment">// There's already a work-in-progress. Reuse it.</span></span><br><span class="line">    workInProgressHook = nextWorkInProgressHook;</span><br><span class="line">    nextWorkInProgressHook = workInProgressHook.next;</span><br><span class="line"></span><br><span class="line">    currentHook = nextCurrentHook;</span><br><span class="line">    nextCurrentHook = currentHook !== <span class="literal">null</span> ? currentHook.next : <span class="literal">null</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Clone from the current hook.</span></span><br><span class="line">    invariant(</span><br><span class="line">      nextCurrentHook !== <span class="literal">null</span>,</span><br><span class="line">      <span class="string">'Rendered more hooks than during the previous render.'</span>,</span><br><span class="line">    );</span><br><span class="line">    currentHook = nextCurrentHook;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> newHook: Hook = &#123;</span><br><span class="line">      memoizedState: currentHook.memoizedState,</span><br><span class="line"></span><br><span class="line">      baseState: currentHook.baseState,</span><br><span class="line">      queue: currentHook.queue,</span><br><span class="line">      baseUpdate: currentHook.baseUpdate,</span><br><span class="line"></span><br><span class="line">      next: <span class="literal">null</span>,</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (workInProgressHook === <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="comment">// This is the first hook in the list.</span></span><br><span class="line">      workInProgressHook = firstWorkInProgressHook = newHook;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// Append to the end of the list.</span></span><br><span class="line">      workInProgressHook = workInProgressHook.next = newHook;</span><br><span class="line">    &#125;</span><br><span class="line">    nextCurrentHook = currentHook.next;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> workInProgressHook;</span><br><span class="line">&#125;</span><br></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </figure>
+                <p>更新（二次渲染）的时候会发生什么事情：updateState 会依次遍历链表、读取数据并渲染。注意这个过程就像从数组中依次取值一样，是完全按照顺序（或者说索引）来的。因此 React 不会看你命名的变量名是 career 还是别的什么，它只认你这一次 useState 调用，于是它难免会认为：喔，原来你想要的是第一个位置的 hook 啊。 </p>
+                <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+                <p>hooks 的渲染是通过“依次遍历”来定位每个 hooks 内容的。如果前后两次读到的链表在顺序上出现差异，那么渲染的结果自然是不可控的。</p>
+                <p>这个现象有点像我们构建了一个长度确定的数组，数组中的每个坑位都对应着一块确切的信息，后续每次从数组里取值的时候，只能够通过索引（也就是位置）来定位数据。也正因为如此，Hooks 的本质其实是链表。</p>
+            </section> <!-- Tags START -->
+            <div class="tags"> <span>Tags:</span> <a href="/tags#React"> <span class="tag-code">React</span> </a> <a href="/tags#React Hooks"> <span class="tag-code">React Hooks</span> </a> </div> <!-- Tags END --> <!-- 打赏 START --> <!-- 打赏 END --> <!-- 二维码 START --> <!-- 二维码 END --> <!-- No Comment -->
+        </article> <!-- Article END --> <!-- Catalog START --> <!-- Catalog END -->
+    </main>
+    <script>
+        (function() {
+            var url = 'https://www.licoded.top/react-hooks-why-should-fix-orders/';
+            var banner = ''
+            if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+                $('#article-banner').css({
+                    'background-image': 'url(' + banner + ')'
+                })
+            } else {
+                $('#article-banner').geopattern(url)
+            }
+            $('.header').removeClass('fixed-header')
+
+            // error image
+            $(".markdown-content img").on('error', function() {
+                $(this).css({
+                    'cursor': 'default'
+                })
+            })
+        })();
+    </script>
+    <div class="scroll-top"> <span class="arrow-icon"></span> </div>
+    <footer class="app-footer">
+        <p class="copyright"> <a href="https://beian.miit.gov.cn" target="_blank">豫ICP备19022147号</a> | &copy; 2025 All rights reserved. <br> Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/yanm1ng" target="_blank">yanm1ng</a> </p>
+    </footer>
+    <script>
+        function async (u, c) {
+            var d = document,
+                t = 'script',
+                o = d.createElement(t),
+                s = d.getElementsByTagName(t)[0];
+            o.src = u;
+            if (c) {
+                o.addEventListener('load', function(e) {
+                    c(null, e);
+                }, false);
+            }
+            s.parentNode.insertBefore(o, s);
+        }
+    </script>
+    <script>
+        async ("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function() {
+            FastClick.attach(document.body);
+        })
+    </script>
+    <script>
+        var hasLine = 'true';
+        async ("https://cdn.jsdelivr.net/npm/highlightjs@9.12.0/highlight.pack.min.js", function() {
+            $('figure pre').each(function(i, block) {
+                var figure = $(this).parents('figure');
+                if (hasLine === 'false') {
+                    figure.find('.gutter').hide();
+                }
+                var lang = figure.attr('class').split(' ')[1] || 'code';
+                var codeHtml = $(this).html();
+                var codeTag = document.createElement('code');
+                codeTag.className = lang;
+                codeTag.innerHTML = codeHtml;
+                $(this).attr('class', '').empty().html(codeTag);
+                figure.attr('data-lang', lang.toUpperCase());
+                hljs.highlightBlock(block);
+            });
+        })
+    </script> <!-- Baidu Tongji -->
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

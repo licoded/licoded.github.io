@@ -7,7 +7,7 @@
     <meta name="description" content="记录和分享ACM和前端、Java、Python以及计算机课程的学习笔记">
     <meta name="keyword" content="hexo-theme, vuejs">
     <link rel="shortcut icon" type="image/ico" href="https://ghimg.licoded.site/vexo/logo.png">
-    <title> 关于我 | 星际穿越 </title>
+    <title> Vim Tricks | 星际穿越 </title>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/tomorrow.min.css" rel="stylesheet">
@@ -58,24 +58,78 @@
             </div>
         </div>
     </header>
-    <div id="about-banner" style="background-image: url(https://ghimg.licoded.site/vexo/about-cover.jpeg)"></div>
-    <div class="author">
-        <div class="head"> <img src="https://ghimg.licoded.site/vexo/avator.jpeg"> </div>
-        <h3>Licoded</h3>
-        <p class="description">Talk is cheap, show me the code!</p>
-        <section class="share-icons"> <a class="icon-github" href="https://github.com/Licoded" target="_blank"> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-github fa-stack-1x fa-inverse"></i> </span> </a> <a class="icon-zhihu" href="https://www.zhihu.com/people/yummy1121" target="_blank"> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-stack-1x fa-inverse">知</i> </span> </a> </section>
+    <div id="article-banner">
+        <h2>Vim Tricks</h2>
+        <p class="post-date">2024-04-16</p>
+        <div class="arrow-down"> <a href="javascript:;"></a> </div>
     </div>
+    <main class="app-body flex-box"> <!-- Article START -->
+        <article class="post-article">
+            <section class="markdown-content">
+                <h2 id="jumps"><a href="#jumps" class="headerlink" title="jumps"></a>jumps</h2>
+                <ul>
+                    <li><code>gg/G</code>, <code>num+gg</code></li>
+                    <li><code>hijk</code></li>
+                    <li>jump<ul>
+                            <li><code>C-o</code>(out/previous), <code>C-i</code>(in/next)</li>
+                        </ul>
+                    </li>
+                    <li>mark</li>
+                    <li><code>0/$</code></li>
+                    <li><code>I/A</code></li>
+                </ul>
+                <h2 id="manipulate-numbers-list"><a href="#manipulate-numbers-list" class="headerlink" title="manipulate numbers list"></a>manipulate numbers list</h2>
+                <ul>
+                    <li><code>ctrl+a/x</code> ascending/descending</li>
+                    <li>g<code>ctrl+a/x</code></li>
+                    <li>10g<c-a></c-a></li>
+                    <li>:help CTRL-A</li>
+                </ul>
+                <h3 id="reference-links"><a href="#reference-links" class="headerlink" title="reference links"></a>reference links</h3>
+                <blockquote>
+                    <ul>
+                        <li><a href="https://irian.to/blogs/quick-vim-tips-to-generate-and-increment-numbers/" target="_blank" rel="noopener">Quick Vim Tips to Generate and Increment Numbers</a></li>
+                    </ul>
+                </blockquote>
+                <h2 id="go-to-end-of-current-tag-when-editing-HTML-Vue-React-files"><a href="#go-to-end-of-current-tag-when-editing-HTML-Vue-React-files" class="headerlink" title="go to end of current tag (when editing HTML/Vue/React files)"></a>go to end of current tag (when editing HTML/Vue/React files)</h2>
+                <h3 id="Choice1-only-use-raw-features-of-VIM"><a href="#Choice1-only-use-raw-features-of-VIM" class="headerlink" title="Choice1: only use raw features of VIM"></a>Choice1: only use raw features of VIM</h3>
+                <p><code>vat + Esc</code> to get to the ending tag.</p>
+                <p><code>vato + Esc</code> to get to the starting tag.</p>
+                <p>After <code>vat</code> you can also press <code>o</code> to jump back and forth between the start and the end.</p>
+                <h3 id="Choice2-use-plugins"><a href="#Choice2-use-plugins" class="headerlink" title="Choice2: use plugins"></a>Choice2: use plugins</h3>
+                <h4 id="matchit"><a href="#matchit" class="headerlink" title="matchit"></a><a href="https://github.com/vim/vim/tree/master/runtime/pack/dist/opt/matchit" target="_blank" rel="noopener">matchit</a></h4>
+                <p>Seems like matchit plugin will do the same by allowing you to jump with %</p>
+                <p><a href="https://github.com/vim/vim/tree/master/runtime/pack/dist/opt/matchit" target="_blank" rel="noopener">https://github.com/vim/vim/tree/master/runtime/pack/dist/opt/matchit</a></p>
+                <h4 id="vim-matchup"><a href="#vim-matchup" class="headerlink" title="vim-matchup"></a><a href="https://github.com/andymass/vim-matchup" target="_blank" rel="noopener">vim-matchup</a></h4>
+                <p>I’d recommend using matchup these days, it’s a modern replacement for matchit.</p>
+                <p><a href="https://github.com/andymass/vim-matchup" target="_blank" rel="noopener">https://github.com/andymass/vim-matchup</a></p>
+                <h2 id="string-substitute"><a href="#string-substitute" class="headerlink" title="string substitute"></a>string substitute</h2>
+                <blockquote>
+                    <p><a href="https://poe.com/s/ReEG2NsFyCqw06dnl1Kr" target="_blank" rel="noopener">https://poe.com/s/ReEG2NsFyCqw06dnl1Kr</a></p>
+                </blockquote>
+            </section> <!-- Tags START -->
+            <div class="tags"> <span>Tags:</span> <a href="/tags#vim"> <span class="tag-code">vim</span> </a> </div> <!-- Tags END --> <!-- 打赏 START --> <!-- 打赏 END --> <!-- 二维码 START --> <!-- 二维码 END --> <!-- No Comment -->
+        </article> <!-- Article END --> <!-- Catalog START --> <!-- Catalog END -->
+    </main>
     <script>
         (function() {
-            $('.header').removeClass('fixed-header')
-            var windowH = $(window).height();
-            var author = $('.author')
-            var bodyH = author.offset().top + author[0].offsetHeight + 71;
-            if (bodyH < windowH) {
-                author.css({
-                    'margin-bottom': windowH - bodyH
+            var url = 'https://www.licoded.top/vim-tricks/';
+            var banner = ''
+            if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+                $('#article-banner').css({
+                    'background-image': 'url(' + banner + ')'
                 })
+            } else {
+                $('#article-banner').geopattern(url)
             }
+            $('.header').removeClass('fixed-header')
+
+            // error image
+            $(".markdown-content img").on('error', function() {
+                $(this).css({
+                    'cursor': 'default'
+                })
+            })
         })();
     </script>
     <div class="scroll-top"> <span class="arrow-icon"></span> </div>
